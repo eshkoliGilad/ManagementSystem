@@ -1,0 +1,25 @@
+﻿<Window x:Class="Management_System.new_tenant"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="new_tenant" Height="450" Width="400">
+    <Grid>
+        <Button x:Name="save_tenant" Content="שמור" HorizontalAlignment="Left" Margin="154,329,0,0" VerticalAlignment="Top" Width="75" Click="save_tenant_Click"/>
+        <TextBox x:Name="phone_number_box" HorizontalAlignment="Left" Height="23" Margin="215,191,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="floor_number_tenants" HorizontalAlignment="Left" Height="23" Margin="215,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="name_of_tenant_box" HorizontalAlignment="Left" Height="23" Margin="215,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="appartment_number_box" HorizontalAlignment="Left" Height="23" Margin="50,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="email_box" HorizontalAlignment="Left" Height="23" Margin="215,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="cellphone_number_box" HorizontalAlignment="Left" Height="23" Margin="50,191,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="name_block" HorizontalAlignment="Left" Margin="285,10,0,0" TextWrapping="Wrap" Text=":שם דייר" VerticalAlignment="Top"/>
+        <TextBlock x:Name="building_block" HorizontalAlignment="Left" Margin="125,10,0,0" TextWrapping="Wrap" Text=":שם בניין" VerticalAlignment="Top"/>
+        <TextBlock x:Name="floor_block" HorizontalAlignment="Left" Margin="270,93,0,0" TextWrapping="Wrap" Text=":מספר קומה" VerticalAlignment="Top"/>
+        <TextBlock x:Name="appartment_number_block" HorizontalAlignment="Left" Margin="105,93,0,0" TextWrapping="Wrap" Text=":מספר דירה" VerticalAlignment="Top"/>
+        <TextBlock x:Name="phoner_block" HorizontalAlignment="Left" Margin="270,170,0,0" TextWrapping="Wrap" Text=":מספר טלפון" VerticalAlignment="Top"/>
+        <TextBlock x:Name="cellphoner_block" HorizontalAlignment="Left" Margin="101,170,0,0" TextWrapping="Wrap" Text=":מספר פלאפון" VerticalAlignment="Top"/>
+        <TextBlock x:Name="email_block" HorizontalAlignment="Left" Margin="294,250,0,0" TextWrapping="Wrap" Text=":אי-מייל" VerticalAlignment="Top"/>
+        <TextBlock x:Name="appartment_state_block" HorizontalAlignment="Left" Margin="101,250,0,0" TextWrapping="Wrap" Text=":מצב דירה" VerticalAlignment="Top"/>
+        <ComboBox x:Name="building_combox" HorizontalAlignment="Left" Margin="50,34,0,0" VerticalAlignment="Top" Width="118" SelectionChanged="building_combox_SelectionChanged" Loaded="ComboBox_Loaded"/>
+        <ComboBox x:Name="state_combox" HorizontalAlignment="Left" Margin="52,272,0,0" VerticalAlignment="Top" Width="118" SelectionChanged="state_combox_SelectionChanged" Loaded="ComboBox_Loaded_2"/>
+
+    </Grid>
+</Window>

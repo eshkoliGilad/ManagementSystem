@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Management_System.Login"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:local="clr-namespace:Management_System"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+
+
+    <UserControl.Resources>
+        <local:Ticker x:Key="ticker" />
+    </UserControl.Resources>
+    <Grid>
+      
+        <Image x:Name="company_logo" Margin="322,76,282,298"  Stretch="Fill"/>
+        <TextBox x:Name="textBok_user" HorizontalAlignment="Left" Height="23" Margin="343,341,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125"/>
+        <PasswordBox x:Name="textBox_password" HorizontalAlignment="Left" Margin="345,415,0,0" VerticalAlignment="Top" Width="123"/>
+        <Button x:Name="Login_Button" Content="כניסה" HorizontalAlignment="Left" Margin="366,496,0,0" VerticalAlignment="Top" Width="75" Click="login_button"/>
+        <TextBlock x:Name="Block_password" HorizontalAlignment="Left" Margin="534,419,0,0" TextWrapping="Wrap" Text=":סיסמא" VerticalAlignment="Top"/>
+        <TextBlock x:Name="block_user" HorizontalAlignment="Left" Margin="505,348,0,0" TextWrapping="Wrap" Text=":שם משתמש" VerticalAlignment="Top"/>
+       
+        <TextBlock  x:Name="tbArrivalDateTime"
+            Text="{Binding Source={StaticResource ticker}, Path=Now, Mode=OneWay,
+                   StringFormat='{}{0:dd-MMM-yyyy HH:mm:ss}'}"
+                   VerticalAlignment="Top"
+                   Margin="557,14,0,0"
+                   FontSize="20"
+                   HorizontalAlignment="Left" TextWrapping="Wrap" Height="47" Width="223"/>
+    </Grid>
+</UserControl>

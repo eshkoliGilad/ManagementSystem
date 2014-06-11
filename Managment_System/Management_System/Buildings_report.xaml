@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Management_System.Buildings_report"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1200">
+    <Grid Margin="10,9,10,11">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="721*"/>
+            <ColumnDefinition Width="459*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Name="dgUsers" SelectionUnit="Cell" SelectionMode="Single" AutoGenerateColumns="False" Margin="0,52,0,109" Grid.ColumnSpan="2" ItemsSource="{Binding listOfTenants}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="דצמבר" Binding="{Binding December,Mode=TwoWay}" Width="*" />
+                <DataGridTextColumn Header="נובמבר" Binding="{Binding November,Mode=TwoWay}" Width="*" />
+                <DataGridTextColumn Header="אוקטובר" Binding="{Binding October,Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="ספטמבר" Binding="{Binding September,Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="אוגוסט" Binding="{Binding August,Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="יולי" Binding="{Binding July,Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="יוני" Binding="{Binding June,Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="מאי" Binding="{Binding May,Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="אפריל" Binding="{Binding April,Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="מרץ" Binding="{Binding March,Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="פברואר" Binding="{Binding February,Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="ינואר" Binding="{Binding January,Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="שם דייר" Binding="{Binding Name}" Width="200"/>
+                <DataGridTextColumn Header="מס' דירה" Binding="{Binding apartmentNumber}" Width="60"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="back_button" Content="חזרה" HorizontalAlignment="Left" Margin="562,487,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <TextBlock x:Name="address_Reports_show" HorizontalAlignment="Left" Margin="637,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Button x:Name="save_button" Content="שמירה" Margin="451,487,195,0" VerticalAlignment="Top" Click="save_button_Click"/>
+        <Image x:Name="stateOfDB" HorizontalAlignment="Left" Height="30" Width="30" Margin="7,7,0,0" Grid.RowSpan="2" VerticalAlignment="Top" />
+    </Grid>
+
+</UserControl>

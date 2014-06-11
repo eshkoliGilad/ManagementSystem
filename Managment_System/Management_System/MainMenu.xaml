@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Management_System.MainMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+       
+        <Button x:Name="buildings_button" Content="בניינים" HorizontalAlignment="Left" Margin="631,240,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="22" Click="buildings_button_Click"/>
+        <Button x:Name="attendence_button" Content="דיירים" HorizontalAlignment="Left" Margin="457,240,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="22" Click="attendence_button_Click"/>
+        <Button x:Name="reports_button" Content="דוחות" HorizontalAlignment="Left" Margin="277,240,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="22" Click="reports_button_Click"/>
+        <Button x:Name="malfunctions_button" Content="תקלות" HorizontalAlignment="Left" Margin="113,240,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="22" Click="malfunctions_button_Click"/>
+        <Button x:Name="back_button" Content="חזרה" HorizontalAlignment="Left" Margin="694,516,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="75" Click="back_button_Click"/>
+        <Button x:Name="exit_button" Content="יציאה" HorizontalAlignment="Left" Margin="30,516,0,0" VerticalAlignment="Top" Width="75" Click="exit_button_Click" Grid.Row="1" Height="22"/>
+        <Image x:Name="logo_menu" HorizontalAlignment="Left" Height="132" Margin="319,50,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="175" />
+        <Image x:Name="stateOfDB" HorizontalAlignment="Left" Height="30" Width="30" Margin="7,7,0,0" Grid.RowSpan="2" VerticalAlignment="Top" />
+
+
+    </Grid>
+</UserControl>

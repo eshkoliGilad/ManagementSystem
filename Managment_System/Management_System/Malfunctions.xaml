@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="Management_System.Malfunctions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid>
+        <Button x:Name="back_button" Content="חזרה" HorizontalAlignment="Left" Margin="672,503,0,0" VerticalAlignment="Top" Width="75" Click="back_button_Click"/>
+        <ListView x:Name="closedMalslvDataBinding" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Height="306" Margin="25,64,0,0" VerticalAlignment="Top" Width="368" SelectionChanged="closedMalslvDataBinding_SelectionChanged">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="VerticalContentAlignment" Value="Top" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="תאריך" Width="125" DisplayMemberBinding="{Binding date}"/>
+                    <GridViewColumn Header="סוג" Width="125" DisplayMemberBinding="{Binding type}"/>
+                    <GridViewColumn Header="בניין" Width="125" DisplayMemberBinding="{Binding building}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="openMalslvDataBinding" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Height="306" Margin="413,64,0,0" VerticalAlignment="Top" Width="354" SelectionChanged="openMalslvDataBinding_SelectionChanged">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="VerticalContentAlignment" Value="Top" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="תאריך" Width="125" DisplayMemberBinding="{Binding date}"/>
+                    <GridViewColumn Header="סוג" Width="125" DisplayMemberBinding="{Binding type}"/>
+                    <GridViewColumn Header="בניין" Width="125" DisplayMemberBinding="{Binding building}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="new_mal_button" Content="חדש" HorizontalAlignment="Left" Margin="672,398,0,0" VerticalAlignment="Top" Width="75" Click="new_mal_button_Click"/>
+        <Button x:Name="close_mals_button" Content="סגור" HorizontalAlignment="Left" Margin="492,398,0,0" VerticalAlignment="Top" Width="75" Click="close_mals_button_Click"/>
+        <Button x:Name="print_sum_button" Content="הדפס" HorizontalAlignment="Left" Margin="52,398,0,0" VerticalAlignment="Top" Width="75" Click="print_sum_button_Click"/>
+        <Button x:Name="delete_mals_button" Content="מחק" HorizontalAlignment="Left" Margin="232,398,0,0" VerticalAlignment="Top" Width="75" Click="delete_mals_button_Click"/>
+        <Button x:Name="delete_all_button" Content="מחק הכל" HorizontalAlignment="Left" Margin="232,449,0,0" VerticalAlignment="Top" Width="75" Click="delete_all_button_Click"/>
+        <Button x:Name="exit_button" Content="יציאה" HorizontalAlignment="Left" Margin="52,503,0,0" VerticalAlignment="Top" Width="75" Click="exit_button_Click"/>
+        <TextBlock x:Name="headline_open" HorizontalAlignment="Left" Margin="533,27,0,0" TextWrapping="Wrap" Text="תקלות פתוחות" VerticalAlignment="Top" FontSize="20"/>
+        <TextBlock x:Name="headline_close" HorizontalAlignment="Left" Margin="142,27,0,0" TextWrapping="Wrap" Text="תקלות סגורות" VerticalAlignment="Top" FontSize="20"/>
+        <Image x:Name="stateOfDB" HorizontalAlignment="Left" Height="30" Width="30" Margin="7,7,0,0" Grid.RowSpan="2" VerticalAlignment="Top" />
+
+    </Grid>
+</UserControl>
