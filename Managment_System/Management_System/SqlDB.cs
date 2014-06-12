@@ -37,27 +37,148 @@ namespace Management_System
         SqlConnection conLocal;
         MySqlConnection con;
         public static bool isOnline = false;
+        
         public SqlDB()
         {
             con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
         }
 
+
+        public void save_Malfunction(string[] list)
+        {
+
+            if (isOnline)
+            {
+                con.Open();
+                int rows = 0;
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM malfunctions ", con); //for reading
+                MySqlDataReader reader = cmd.ExecuteReader(); //for writing
+
+                while (reader.Read()) //for writing
+                {
+                    if (rows < Convert.ToInt32(reader[4].ToString()))
+                        rows = Convert.ToInt32(reader[4].ToString());
+                }
+                rows++;
+                string state;//, type, building, desc,date;
+                state = "opend";
+                con.Close();
+                con.Open();
+                string sqlIns = "INSERT INTO malfunctions (date, state,building, type, description, id) VALUES (@date, @state, @building, @type, @desc, @id)";
+                try
+                {
+                    MySqlCommand cmdIns = new MySqlCommand(sqlIns, con);
+                    cmdIns.Parameters.AddWithValue("@date", list[0]);
+                    cmdIns.Parameters.AddWithValue("@state", state);
+                    cmdIns.Parameters.AddWithValue("@building", list[1]);
+                    cmdIns.Parameters.AddWithValue("@type", list[2]);
+                    cmdIns.Parameters.AddWithValue("@desc", list[3]);
+                    cmdIns.Parameters.AddWithValue("@id", rows);
+                    cmdIns.ExecuteNonQuery();
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            else
+            {
+                conLocal.Open();
+                int rows = 0;
+                SqlCommand cmd = new SqlCommand("SELECT * FROM malfunctions ", conLocal); //for reading
+                SqlDataReader reader = cmd.ExecuteReader(); //for writing
+
+                while (reader.Read()) //for writing
+                {
+                    if (rows < Convert.ToInt32(reader[4].ToString()))
+                        rows = Convert.ToInt32(reader[4].ToString());
+                }
+                rows++;
+                string state;//, type, building, desc,date;
+                state = "opend";
+                conLocal.Close();
+                conLocal.Open();
+                string sqlIns = "INSERT INTO malfunctions (date, state,building, type, description, id) VALUES (@date, @state, @building, @type, @desc, @id)";
+                try
+                {
+                    SqlCommand cmdIns = new SqlCommand(sqlIns, conLocal);
+                    cmdIns.Parameters.AddWithValue("@date", list[0]);
+                    cmdIns.Parameters.AddWithValue("@state", state);
+                    cmdIns.Parameters.AddWithValue("@building", list[1]);
+                    cmdIns.Parameters.AddWithValue("@type", list[2]);
+                    cmdIns.Parameters.AddWithValue("@desc", list[3]);
+                    cmdIns.Parameters.AddWithValue("@id", rows);
+                    cmdIns.ExecuteNonQuery();
+                }
+                finally
+                {
+                    conLocal.Close();
+                }
+            }
+}
+
+        public List<string> combobox_building_load()
+        {
+            List<string> data = new List<string>();
+
+            if (isOnline)
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM buildings ", con); //for reading
+                MySqlDataReader reader = cmd.ExecuteReader(); //for writing
+
+                while (reader.Read()) //for writing
+                {
+                    data.Add(reader[0].ToString().Trim());
+                }
+                con.Close();
+            }
+            else
+            {
+                conLocal.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM buildings ", conLocal); //for reading
+                SqlDataReader reader = cmd.ExecuteReader(); //for writing
+
+                while (reader.Read()) //for writing
+                {
+                    data.Add(reader[0].ToString().Trim());
+                }
+                conLocal.Close();
+            }
+                return data;
+        }
+
         public void deleteAllMals()
         {
-            
-            con.Open();
             string sqlIns = "DELETE FROM malfunctions WHERE state=@state";
-
-            try
+            if (isOnline)
             {
-                MySqlCommand cmdIns = new MySqlCommand(sqlIns, con);
-                cmdIns.Parameters.AddWithValue("@state", "close");
-                int t = cmdIns.ExecuteNonQuery();
+                try
+                {
+                    con.Open();
+                    MySqlCommand cmdIns = new MySqlCommand(sqlIns, con);
+                    cmdIns.Parameters.AddWithValue("@state", "close");
+                    int t = cmdIns.ExecuteNonQuery();
+                }
+                finally
+                {
+                    con.Close();
+                }
             }
-            finally
+            else
             {
-                con.Close();
+                try
+                {
+                    conLocal.Open();
+                    SqlCommand cmdIns = new SqlCommand(sqlIns, conLocal);
+                    cmdIns.Parameters.AddWithValue("@state", "close");
+                    int t = cmdIns.ExecuteNonQuery();
+                }
+                finally
+                {
+                    conLocal.Close();
+                }
             }
         }
 
@@ -67,41 +188,78 @@ namespace Management_System
         {
             
             int temp = num; 
-            con.Open();
+            
             string sqlIns = "DELETE FROM malfunctions WHERE id=@id";
-
-            try
+            if (isOnline)
             {
-                MySqlCommand cmdIns = new MySqlCommand(sqlIns, con);
-                cmdIns.Parameters.AddWithValue("@id", temp);
-                int t = cmdIns.ExecuteNonQuery();
+                try
+                {
+                    con.Open();
+                    MySqlCommand cmdIns = new MySqlCommand(sqlIns, con);
+                    cmdIns.Parameters.AddWithValue("@id", temp);
+                    int t = cmdIns.ExecuteNonQuery();
+                }
+                finally
+                {
+                    con.Close();
+                }
             }
-            finally
+            else
             {
-                con.Close();
+                try
+                {
+                    conLocal.Open();
+                    SqlCommand cmdIns = new SqlCommand(sqlIns, conLocal);
+                    cmdIns.Parameters.AddWithValue("@id", temp);
+                    int t = cmdIns.ExecuteNonQuery();
+                }
+                finally
+                {
+                    conLocal.Close();
+                }
             }
         }
 
 
         public void closeMals(int num)
         {
-            
+
             int temp = num;
-            con.Open();
+
             string sqlIns = "UPDATE malfunctions SET state=@new_state WHERE id=@id";
-
-            try
+            if (isOnline)
             {
-                MySqlCommand cmdIns = new MySqlCommand(sqlIns, con);
-                cmdIns.Parameters.AddWithValue("@new_state", "close");
-                cmdIns.Parameters.AddWithValue("@id", temp);
-                int t = cmdIns.ExecuteNonQuery();
+                try
+                {
+                    con.Open();
+                    MySqlCommand cmdIns = new MySqlCommand(sqlIns, con);
+                    cmdIns.Parameters.AddWithValue("@new_state", "close");
+                    cmdIns.Parameters.AddWithValue("@id", temp);
+                    int t = cmdIns.ExecuteNonQuery();
 
+                }
+
+                finally
+                {
+                    con.Close();
+                }
             }
-
-            finally
+            else
             {
-                con.Close();
+                try
+                {
+                    conLocal.Open();
+                    SqlCommand cmdIns = new SqlCommand(sqlIns, conLocal);
+                    cmdIns.Parameters.AddWithValue("@new_state", "close");
+                    cmdIns.Parameters.AddWithValue("@id", temp);
+                    int t = cmdIns.ExecuteNonQuery();
+
+                }
+
+                finally
+                {
+                    conLocal.Close();
+                }
             }
         }
 
@@ -109,25 +267,49 @@ namespace Management_System
         {
             itemsMals = new List<Malfunctions.Malfunction>();
             string type, building_mal, date;
-
-            con.Open();
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM malfunctions WHERE state ='close' ", con); //for reading
-            MySqlDataReader reader = cmd.ExecuteReader(); //for writing
-            while (reader.Read()) //for writing
+            if (isOnline)
             {
-                building_mal = reader[1].ToString().Trim();
-                type = reader[2].ToString().Trim();
-                date = reader[5].ToString().Trim();
-                Malfunctions.Malfunction malfunctoin = new Malfunctions.Malfunction();
-                malfunctoin.building = building_mal;
-                string id = reader[4].ToString().Trim();
-                malfunctoin.id = Convert.ToInt32(id);
-                malfunctoin.type = type;
-                malfunctoin.description = reader[3].ToString().Trim();
-                malfunctoin.date = date;
-                itemsMals.Add(malfunctoin);
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM malfunctions WHERE state ='close' ", con); //for reading
+                MySqlDataReader reader = cmd.ExecuteReader(); //for writing
+                while (reader.Read()) //for writing
+                {
+                    building_mal = reader[1].ToString().Trim();
+                    type = reader[2].ToString().Trim();
+                    date = reader[5].ToString().Trim();
+                    Malfunctions.Malfunction malfunctoin = new Malfunctions.Malfunction();
+                    malfunctoin.building = building_mal;
+                    string id = reader[4].ToString().Trim();
+                    malfunctoin.id = Convert.ToInt32(id);
+                    malfunctoin.type = type;
+                    malfunctoin.description = reader[3].ToString().Trim();
+                    malfunctoin.date = date;
+                    itemsMals.Add(malfunctoin);
+                }
+                con.Close();
             }
-            con.Close();
+            else
+            {
+                conLocal.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM malfunctions WHERE state ='close' ", conLocal); //for reading
+                SqlDataReader reader = cmd.ExecuteReader(); //for writing
+                while (reader.Read()) //for writing
+                {
+                    building_mal = reader[1].ToString().Trim();
+                    type = reader[2].ToString().Trim();
+                    date = reader[5].ToString().Trim();
+                    Malfunctions.Malfunction malfunctoin = new Malfunctions.Malfunction();
+                    malfunctoin.building = building_mal;
+                    string id = reader[4].ToString().Trim();
+                    malfunctoin.id = Convert.ToInt32(id);
+                    malfunctoin.type = type;
+                    malfunctoin.description = reader[3].ToString().Trim();
+                    malfunctoin.date = date;
+                    itemsMals.Add(malfunctoin);
+                }
+                conLocal.Close();
+            }
+
             return itemsMals;
         }
 
@@ -139,24 +321,48 @@ namespace Management_System
             string type, building_mal, date;
             //con = new MySqlConnection();
             //con.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            con.Open();
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM malfunctions WHERE state ='opend' ", con); //for reading
-            MySqlDataReader reader = cmd.ExecuteReader(); //for writing
-            while (reader.Read()) //for writing
+            if (isOnline)
             {
-                building_mal = reader[1].ToString().Trim();
-                type = reader[2].ToString().Trim();
-                date = reader[5].ToString().Trim();
-                Malfunctions.Malfunction malfunctoin = new Malfunctions.Malfunction();
-                malfunctoin.building = building_mal;
-                string id = reader[4].ToString().Trim();
-                malfunctoin.id = Convert.ToInt32(id);
-                malfunctoin.type = type;
-                malfunctoin.date = date;
-                malfunctoin.description = reader[3].ToString().Trim();
-                itemsMals.Add(malfunctoin);
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM malfunctions WHERE state ='opend' ", con); //for reading
+                MySqlDataReader reader = cmd.ExecuteReader(); //for writing
+                while (reader.Read()) //for writing
+                {
+                    building_mal = reader[1].ToString().Trim();
+                    type = reader[2].ToString().Trim();
+                    date = reader[5].ToString().Trim();
+                    Malfunctions.Malfunction malfunctoin = new Malfunctions.Malfunction();
+                    malfunctoin.building = building_mal;
+                    string id = reader[4].ToString().Trim();
+                    malfunctoin.id = Convert.ToInt32(id);
+                    malfunctoin.type = type;
+                    malfunctoin.date = date;
+                    malfunctoin.description = reader[3].ToString().Trim();
+                    itemsMals.Add(malfunctoin);
+                }
+                con.Close();
             }
-            con.Close();
+            else
+            {
+                conLocal.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM malfunctions WHERE state ='opend' ", conLocal); //for reading
+                SqlDataReader reader = cmd.ExecuteReader(); //for writing
+                while (reader.Read()) //for writing
+                {
+                    building_mal = reader[1].ToString().Trim();
+                    type = reader[2].ToString().Trim();
+                    date = reader[5].ToString().Trim();
+                    Malfunctions.Malfunction malfunctoin = new Malfunctions.Malfunction();
+                    malfunctoin.building = building_mal;
+                    string id = reader[4].ToString().Trim();
+                    malfunctoin.id = Convert.ToInt32(id);
+                    malfunctoin.type = type;
+                    malfunctoin.date = date;
+                    malfunctoin.description = reader[3].ToString().Trim();
+                    itemsMals.Add(malfunctoin);
+                }
+                conLocal.Close();
+            }
             return itemsMals;
         }
 
@@ -525,7 +731,7 @@ namespace Management_System
                 copyDataBasesOfTenants();
                 copyDataBasesOfMeeting();
                 copyDataBasesOfMalfunctions();
-                return isValid;
+                
             }
 
             else
@@ -544,8 +750,8 @@ namespace Management_System
                     }
                 }
                 conLocal.Close();
-                return isValid;
             }
+            return isValid;
         }
         public void add_new_building(string[] listOfParameters)
         {

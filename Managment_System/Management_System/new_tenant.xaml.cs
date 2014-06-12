@@ -35,11 +35,8 @@ namespace Management_System
         public new_tenant(string name) //Edit Tenant
         {
             
+            InitializeComponent();
             address = name;
-            InitializeComponent();
-            db = new SqlDB();
-            flag = true;
-            InitializeComponent();
             db = new SqlDB();
             string[] info = new string[8];
             flag = true;

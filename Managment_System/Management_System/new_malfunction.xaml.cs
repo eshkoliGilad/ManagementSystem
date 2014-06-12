@@ -21,26 +21,21 @@ namespace Management_System
     /// </summary>
     public partial class new_malfunction : Window
     {
-        MySqlConnection con;        
+        
+        SqlDB db;
         public new_malfunction()
         {
             InitializeComponent();
+            db = new SqlDB();
         }
 
 
         private void ComboBox_Building_Loaded(object sender, RoutedEventArgs e)
         {
             List<string> data = new List<string>();
-            con = new MySqlConnection();
-            con.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            con.Open();
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM buildings ", con); //for reading
-            MySqlDataReader reader = cmd.ExecuteReader(); //for writing
+            data = db.combobox_building_load();
             var comboBox = sender as ComboBox;
-            while (reader.Read()) //for writing
-            {
-                data.Add(reader[0].ToString().Trim());
-            }
+            
 
             // ... Assign the ItemsSource to the List.
             comboBox.ItemsSource = data;
@@ -64,42 +59,21 @@ namespace Management_System
         private void save_malfunctions_button_Click(object sender, RoutedEventArgs e)
         {
 
-            con = new MySqlConnection();
-            con.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            con.Open();
-            int rows=0;
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM malfunctions ", con); //for reading
-            MySqlDataReader reader = cmd.ExecuteReader(); //for writing
+          
+            string[] list = new string[4];
             var comboBox = sender as ComboBox;
-            while (reader.Read()) //for writing
+   //         string type, building, desc,date;
+            list[0] = DateTime.Now.ToString("dd-MM-yyyy");
+            list[1]= combobox_type_mal.SelectedValue.ToString();
+            list[2] = combobox_building_mal.SelectedValue.ToString();
+            list[3] = description_mal_box.Text.ToString();
+             try
             {
-                if (rows < Convert.ToInt32(reader[4].ToString()))
-                    rows = Convert.ToInt32(reader[4].ToString());
-            }
-            rows++;
-            string state, type, building, desc,date;
-            date = DateTime.Now.ToString("dd-MM-yyyy");
-            state = "opend";
-            type = combobox_type_mal.SelectedValue.ToString();
-            building = combobox_building_mal.SelectedValue.ToString();
-            desc = description_mal_box.Text.ToString();
-            con.Close();
-            con.Open();
-            string sqlIns = "INSERT INTO malfunctions (date, state,building, type, description, id) VALUES (@date, @state, @building, @type, @desc, @id)";
-            try
-            {
-                MySqlCommand cmdIns = new MySqlCommand(sqlIns, con);
-                cmdIns.Parameters.AddWithValue("@date", date);
-                cmdIns.Parameters.AddWithValue("@state", state);
-                cmdIns.Parameters.AddWithValue("@building", building);
-                cmdIns.Parameters.AddWithValue("@type", type);
-                cmdIns.Parameters.AddWithValue("@desc", desc);
-                cmdIns.Parameters.AddWithValue("@id", rows);
-                cmdIns.ExecuteNonQuery();
+                db.save_Malfunction(list);
             }
             finally
             {
-                con.Close();
+                
                 MessageBox.Show(".תקלה חדשה נשמרה בהצלחה"); //Save stats in DB and refresh list !!!!
                 Switcher.Switch(new Malfunctions());
                 this.Close();

@@ -26,7 +26,7 @@ namespace Management_System
     public partial class Malfunctions : UserControl
     {
         List<Malfunction> items;
-        MySqlConnection con;
+        //MySqlConnection con;
         SqlDB db;
         public Malfunctions()
         {
