@@ -72,9 +72,11 @@
     <Reference Include="MySql.Web">
       <HintPath>..\packages\MySql.Web.6.8.3\lib\net45\MySql.Web.dll</HintPath>
     </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />

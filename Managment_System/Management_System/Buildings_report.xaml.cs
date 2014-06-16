@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
 using System.Collections;
+using System.Printing;
 
 namespace Management_System
 {
@@ -113,7 +114,66 @@ namespace Management_System
 
         }
 
+        private void print_report_Click(object sender, RoutedEventArgs e)
+        {
+            
+            PrintDialog printDlg = new System.Windows.Controls.PrintDialog();
+            //if ((bool)Printdlg.ShowDialog().GetValueOrDefault())
+            //{
+             //   Size pageSize = new Size(Printdlg.PrintableAreaHeight,Printdlg.PrintableAreaWidth);
+              //  // sizing of the element.
+             //   dgUsers.Measure(pageSize);
+             //   dgUsers.Arrange(new Rect(10, 10, pageSize.Width, pageSize.Height));
+             //   Printdlg.PrintVisual(dgUsers, "דוח");
+
+            
+            Transform originalScale = this.LayoutTransform;
+                System.Printing.PrintCapabilities capabilities = printDlg.PrintQueue.GetPrintCapabilities(printDlg.PrintTicket);
+
+
+
+                //get scale of the print wrt to screen of WPF visual
+               
+                double scale = Math.Min(capabilities.PageImageableArea.ExtentWidth / dgUsers.ActualWidth, capabilities.PageImageableArea.ExtentHeight /
+
+                               dgUsers.ActualHeight);
+
+
+
+                //Transform the Visual to scale
+
+                 
+                dgUsers.LayoutTransform = new ScaleTransform(scale, scale);
+                   
+
+
+
+
+
+
+
+                //get the size of the printer page
+
+                Size sz = new Size(capabilities.PageImageableArea.ExtentWidth, capabilities.PageImageableArea.ExtentHeight);
+
+
+
+                //update the layout of the visual to the printer page size.
+
+                dgUsers.Measure(sz);
+
+                dgUsers.Arrange(new Rect(new Point(capabilities.PageImageableArea.OriginWidth, capabilities.PageImageableArea.OriginHeight), sz));
+
+
+               
+                //now print the visual to printer to fit on the one page.
+                printDlg.PrintVisual(dgUsers, address_Reports_show.Text);
+           
+                dgUsers.LayoutTransform = originalScale;
+            }
+        }
+
 
 
     }
-}
+
