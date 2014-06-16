@@ -23,6 +23,7 @@
         <Button x:Name="save_button" Content="שמור" HorizontalAlignment="Left" Margin="350,378,0,0" VerticalAlignment="Top" Width="75" Click="save_button_Click"/>
         <Button x:Name="cancel_button" Content="בטל" HorizontalAlignment="Left" Margin="350,338,0,0" VerticalAlignment="Top" Width="75" Click="cancel_button_Click"/>
         <TextBlock x:Name="meetings_Address" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Top" Margin="108,16,102,0" TextWrapping="Wrap"  FontSize="28" RenderTransformOrigin="0.5,0.5" Width="240"/>
+        <Button x:Name="delete_metting" Content="מחק" HorizontalAlignment="Left" Margin="350,300,0,0" VerticalAlignment="Top" Width="75" Click="delete_metting_Click"/>
 
     </Grid>
 </Window>

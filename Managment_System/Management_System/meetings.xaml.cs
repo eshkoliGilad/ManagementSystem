@@ -106,5 +106,21 @@ namespace Management_System
             }
             
         }
+
+        private void delete_metting_Click(object sender, RoutedEventArgs e)
+        {
+            
+            var item = TenatsMeetings.SelectedItem as meetings.Meeting;
+            if (item != null)
+            {
+                string a = item.notes.ToString().Trim();
+                string b = item.date.ToString().Trim();
+                db.deleteMeeting(a, b);
+                showMeetingsList(building); 
+                MessageBox.Show("אסיפה נמחקה בהצלחה");
+            }
+            else
+                MessageBox.Show("לא נבחרה אסיפה");
+        }
     }
 }

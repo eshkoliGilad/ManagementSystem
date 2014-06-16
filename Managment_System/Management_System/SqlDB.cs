@@ -44,6 +44,41 @@ namespace Management_System
             conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
         }
 
+        public void deleteMeeting(string notes, string date)
+        {
+
+            string sqlIns = "DELETE FROM meetings WHERE explanation=@notes AND date=@date";
+            if (isOnline)
+            {
+                try
+                {
+                    con.Open();
+                    MySqlCommand cmdIns = new MySqlCommand(sqlIns, con);
+                    cmdIns.Parameters.AddWithValue("@notes", notes);
+                    cmdIns.Parameters.AddWithValue("@date", date);
+                    cmdIns.ExecuteNonQuery();
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            else
+            {
+                try
+                {
+                    conLocal.Open();
+                    SqlCommand cmdIns = new SqlCommand(sqlIns, conLocal);
+                    cmdIns.Parameters.AddWithValue("@notes", notes);
+                    cmdIns.Parameters.AddWithValue("@date", date);
+                    cmdIns.ExecuteNonQuery();
+                }
+                finally
+                {
+                    conLocal.Close();
+                }
+            }
+        }
 
         public void save_Malfunction(string[] list)
         {
