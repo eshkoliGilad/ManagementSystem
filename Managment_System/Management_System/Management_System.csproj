@@ -85,6 +85,10 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationClientsideProviders" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -109,6 +113,9 @@
     </Compile>
     <Compile Include="exit_query.xaml.cs">
       <DependentUpon>exit_query.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="loading.xaml.cs">
+      <DependentUpon>loading.xaml</DependentUpon>
     </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -185,7 +192,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dictionary1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="exit_query.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="loading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -333,6 +348,25 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\companyLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DarkBlue.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="lightSilver.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\buildings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\world.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\as.png" />
+    <Resource Include="Resources\as2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

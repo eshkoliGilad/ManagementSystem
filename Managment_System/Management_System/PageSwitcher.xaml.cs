@@ -26,8 +26,9 @@ namespace Management_System
         {
 
             InitializeComponent();
-            //this.ApplyTheme("BureauBlack");
+          //  this.ApplyTheme("ShinyBlue");
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+           
             Switcher.pageSwitcher = this;
             Switcher.Switch(new Login());
             

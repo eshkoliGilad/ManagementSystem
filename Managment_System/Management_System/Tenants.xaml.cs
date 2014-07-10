@@ -55,7 +55,11 @@ namespace Management_System
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(tenantslvDataBinding.ItemsSource);
             view.SortDescriptions.Add(new SortDescription("building", ListSortDirection.Ascending)); //Sort by name of tenant
             view.SortDescriptions.Add(new SortDescription("apartmentNumber", ListSortDirection.Ascending)); //Sort by name of tenant
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("building");
+            view.GroupDescriptions.Add(groupDescription);
+
         }
+
 
         public class Tenant
         {

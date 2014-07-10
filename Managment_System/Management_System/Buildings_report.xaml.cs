@@ -167,7 +167,7 @@ namespace Management_System
 
                
                 //now print the visual to printer to fit on the one page.
-                printDlg.PrintVisual(dgUsers, address_Reports_show.Text);
+                printDlg.PrintVisual(dgUsers, "דוח");
            
                 dgUsers.LayoutTransform = originalScale;
             }

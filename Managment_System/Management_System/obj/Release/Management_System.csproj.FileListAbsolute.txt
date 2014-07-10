@@ -54,3 +54,6 @@ C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\Management_System.exe
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\Management_System.pdb
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\Management_System.csprojResolveAssemblyReference.cache
+C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\Dictionary1.baml
+C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\loading.baml
+C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\loading.g.cs

@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
-        <ListView Name="tenantslvDataBinding" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Height="306" Margin="26,92,0,0" VerticalAlignment="Top" Width="630">
+        <ListView Name="tenantslvDataBinding" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Height="306" Margin="26,92,0,0" VerticalAlignment="Top" Width="638">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="VerticalContentAlignment" Value="Top" />
@@ -16,15 +16,26 @@
             <ListView.View>
                 <GridView>
                  
-                    <GridViewColumn Header="טלפון" Width="120" DisplayMemberBinding="{Binding phone}"/>
+                    <GridViewColumn Header="טלפון" Width="115" DisplayMemberBinding="{Binding phone}"/>
                     <GridViewColumn Header="מצב דירה" Width="110" DisplayMemberBinding="{Binding state}"/>
                     <GridViewColumn Header="מס' דירה" Width="90" DisplayMemberBinding="{Binding apartmentNumber}"/>
                     <GridViewColumn Header="בניין" Width="149" DisplayMemberBinding="{Binding building}"/>
-                    <GridViewColumn Header="שם" Width="149" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="שם" Width="140" DisplayMemberBinding="{Binding Name}"/>
                     
                     
                 </GridView>
             </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock TextAlignment="Center" FontWeight="Bold" TextDecorations="Underline" FontSize="16" Text="{Binding Name}"/>
+                            
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+
         </ListView>
         <Button x:Name="delete_tenant" Content="מחק" HorizontalAlignment="Left" Margin="684,376,0,0" VerticalAlignment="Top" Width="75" Click="delete_tenant_Click"/>
         <Button x:Name="add_tenant" Content="חדש" HorizontalAlignment="Left" Margin="684,94,0,0" VerticalAlignment="Top" Width="75" Click="add_tenant_Click"/>

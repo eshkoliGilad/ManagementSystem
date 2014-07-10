@@ -26,11 +26,12 @@ namespace Management_System
 
             BitmapImage pic = new BitmapImage();
             pic.BeginInit();
-            pic.UriSource = new Uri(@"/Management_System;component/Resources/logo.jpg", UriKind.Relative);
+            pic.UriSource = new Uri(@"/Management_System;component/Resources/buildings.png", UriKind.Relative);
             pic.EndInit();
             logo_menu.Source = pic;
             if (SqlDB.isOnline)
             {
+                
                 BitmapImage logo = new BitmapImage();
                 logo.BeginInit();
                 logo.UriSource = new Uri(@"/Management_System;component/Resources/online.png", UriKind.Relative);
@@ -39,6 +40,7 @@ namespace Management_System
             }
             else
             {
+                
                 BitmapImage logo= new BitmapImage();
                 logo.BeginInit();
                 logo.UriSource = new Uri(@"/Management_System;component/Resources/offline.png", UriKind.Relative);
