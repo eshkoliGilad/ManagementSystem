@@ -1,0 +1,41 @@
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p,
+a, b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend {
+	background-color:#b0c4de;;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+html {
+padding-top:80px;
+}
+.send { background:#ccc; font-size:x-large;}
+h1 { font-size: 24px; }
+	textarea, input[type="text"]
+{
+	border-color: black;
+	border-style: solid;
+	border-width: thin;
+	padding: 3px;
+margin:5px;
+}
+
+@media only screen and (max-device-width:480px){
+	
+h1 { font-size: xx-large; }
+	body { font-size: xx-large; }
+	button, input, select, textarea { font-size: xx-large;}
+	.title {width: 95%; margin:10px; font-size:xx-large;}
+	.send { width: 90%; font-size:xx-large;}
+	textarea, input[type="text"] {
+width:80%;
+	border-color: black;
+	border-style: solid;
+	border-width: thin;
+	padding: 3px;
+margin:5px;
+
+}
