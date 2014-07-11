@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
-        <ListView Name="tenantslvDataBinding" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Height="306" Margin="26,92,0,0" VerticalAlignment="Top" Width="638">
+        <ListView Name="tenantslvDataBinding" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Height="306" Margin="26,118,0,0" VerticalAlignment="Top" Width="638">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="VerticalContentAlignment" Value="Top" />
@@ -37,12 +37,13 @@
             </ListView.GroupStyle>
 
         </ListView>
-        <Button x:Name="delete_tenant" Content="מחק" HorizontalAlignment="Left" Margin="684,376,0,0" VerticalAlignment="Top" Width="75" Click="delete_tenant_Click"/>
-        <Button x:Name="add_tenant" Content="חדש" HorizontalAlignment="Left" Margin="684,94,0,0" VerticalAlignment="Top" Width="75" Click="add_tenant_Click"/>
-        <Button x:Name="open_tenant" Content="ערוך" HorizontalAlignment="Left" Margin="684,237,0,0" VerticalAlignment="Top" Width="75" Click="open_tenant_Click"/>
+        <Button x:Name="delete_tenant" Content="מחק" HorizontalAlignment="Left" Margin="684,402,0,0" VerticalAlignment="Top" Width="75" Click="delete_tenant_Click"/>
+        <Button x:Name="add_tenant" Content="חדש" HorizontalAlignment="Left" Margin="684,120,0,0" VerticalAlignment="Top" Width="75" Click="add_tenant_Click"/>
+        <Button x:Name="open_tenant" Content="ערוך" HorizontalAlignment="Left" Margin="684,263,0,0" VerticalAlignment="Top" Width="75" Click="open_tenant_Click"/>
         <Button x:Name="back_button_tenants" Content="חזרה" HorizontalAlignment="Left" Margin="684,516,0,0" VerticalAlignment="Top" Width="75" Click="back_button_tenants_Click"/>
         <Button x:Name="exit_button" Content="יציאה" HorizontalAlignment="Left" Margin="26,516,0,0" VerticalAlignment="Top" Width="75" Click="exit_button_Click"/>
         <Image x:Name="stateOfDB" HorizontalAlignment="Left" Height="30" Width="30" Margin="7,7,0,0" Grid.RowSpan="2" VerticalAlignment="Top" />
+        <Image x:Name="tenants_img" HorizontalAlignment="Left" Height="132" Margin="288,-16,0,0" VerticalAlignment="Top" Width="275"/>
 
     </Grid>
 </UserControl>

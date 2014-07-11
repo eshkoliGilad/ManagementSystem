@@ -12,4 +12,7 @@
         <TextBox x:Name="description_mal_box" HorizontalAlignment="Left" Height="153" Margin="41,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
 
     </Grid>
+    <Window.Background>
+        <ImageBrush ImageSource="/lightSilver.jpg" />
+    </Window.Background>
 </Window>

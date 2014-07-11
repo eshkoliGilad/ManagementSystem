@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using System.Windows.Threading;
 namespace Management_System
 {
     /// <summary>
@@ -19,6 +19,7 @@ namespace Management_System
     /// </summary>
     public partial class loading : Window
     {
+
         public loading()
         {
             InitializeComponent();
@@ -30,8 +31,10 @@ namespace Management_System
             ball.BeginInit();
             ball.UriSource = new Uri(@"/Management_System;component/Resources/ball.png", UriKind.Relative);
             ball.EndInit();
-            
+
             world.Source = logo;
+            Dispatcher.Invoke(new Action(() => { }), DispatcherPriority.ContextIdle, null);
         }
+      
     }
 }

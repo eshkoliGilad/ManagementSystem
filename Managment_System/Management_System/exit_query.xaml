@@ -6,7 +6,10 @@
     <Grid>
         <Button x:Name="OK_button" Content="אישור" HorizontalAlignment="Left" Margin="32,219,0,0" VerticalAlignment="Top" Width="75" Click="OK_button_Click"/>
         <Button x:Name="cancel_button" Content="ביטול" HorizontalAlignment="Left" Margin="178,219,0,0" VerticalAlignment="Top" Width="75" Click="cancel_button_Click"/>
-        <TextBlock x:Name="text_block" HorizontalAlignment="Center" FontSize="20" Margin="16,37,13,0" TextWrapping="Wrap" Text="שים לב, יציאה מהתוכנית ללא שמירה תגרום לאובדן נתונים. האם ברצונך לצאת בכל זאת ? אם כן, הקש על אישור, אם לא הקש על ביטול" VerticalAlignment="Top" TextAlignment="Right"/>
+        <TextBlock x:Name="text_block" HorizontalAlignment="Center"  FontSize="18px" Margin="19,26,21,0" TextWrapping="Wrap" Text="שים לב, יציאה מהתוכנית ללא שמירה תגרום לאובדן נתונים. האם ברצונך לצאת בכל זאת ? אם כן, הקש על אישור, אם לא הקש על ביטול" VerticalAlignment="Top" TextAlignment="Center" Width="252"/>
 
     </Grid>
+    <Window.Background>
+        <ImageBrush ImageSource="/lightSilver.jpg" />
+    </Window.Background>
 </Window>

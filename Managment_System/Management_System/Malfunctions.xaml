@@ -7,7 +7,7 @@
              d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
         <Button x:Name="back_button" Content="חזרה" HorizontalAlignment="Left" Margin="672,503,0,0" VerticalAlignment="Top" Width="75" Click="back_button_Click"/>
-        <ListView x:Name="closedMalslvDataBinding" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Height="306" Margin="25,64,0,0" VerticalAlignment="Top" Width="368" SelectionChanged="closedMalslvDataBinding_SelectionChanged">
+        <ListView x:Name="closedMalslvDataBinding" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Height="306" Margin="5,64,0,0" VerticalAlignment="Top" Width="375" SelectionChanged="closedMalslvDataBinding_SelectionChanged">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="VerticalContentAlignment" Value="Top" />
@@ -16,13 +16,13 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="תאריך" Width="125" DisplayMemberBinding="{Binding date}"/>
+                    <GridViewColumn Header="תאריך" Width="115" DisplayMemberBinding="{Binding date}"/>
                     <GridViewColumn Header="סוג" Width="125" DisplayMemberBinding="{Binding type}"/>
                     <GridViewColumn Header="בניין" Width="125" DisplayMemberBinding="{Binding building}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="openMalslvDataBinding" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Height="306" Margin="413,64,0,0" VerticalAlignment="Top" Width="354" SelectionChanged="openMalslvDataBinding_SelectionChanged">
+        <ListView x:Name="openMalslvDataBinding" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Height="306" Margin="405,64,0,0" VerticalAlignment="Top" Width="375" SelectionChanged="openMalslvDataBinding_SelectionChanged">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="VerticalContentAlignment" Value="Top" />
@@ -31,7 +31,7 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="תאריך" Width="125" DisplayMemberBinding="{Binding date}"/>
+                    <GridViewColumn Header="תאריך" Width="115" DisplayMemberBinding="{Binding date}"/>
                     <GridViewColumn Header="סוג" Width="125" DisplayMemberBinding="{Binding type}"/>
                     <GridViewColumn Header="בניין" Width="125" DisplayMemberBinding="{Binding building}"/>
                 </GridView>
@@ -43,9 +43,16 @@
         <Button x:Name="delete_mals_button" Content="מחק" HorizontalAlignment="Left" Margin="232,398,0,0" VerticalAlignment="Top" Width="75" Click="delete_mals_button_Click"/>
         <Button x:Name="delete_all_button" Content="מחק הכל" HorizontalAlignment="Left" Margin="232,449,0,0" VerticalAlignment="Top" Width="75" Click="delete_all_button_Click"/>
         <Button x:Name="exit_button" Content="יציאה" HorizontalAlignment="Left" Margin="52,503,0,0" VerticalAlignment="Top" Width="75" Click="exit_button_Click"/>
-        <TextBlock x:Name="headline_open" HorizontalAlignment="Left" Margin="533,27,0,0" TextWrapping="Wrap" Text="תקלות פתוחות" VerticalAlignment="Top" FontSize="20"/>
-        <TextBlock x:Name="headline_close" HorizontalAlignment="Left" Margin="142,27,0,0" TextWrapping="Wrap" Text="תקלות סגורות" VerticalAlignment="Top" FontSize="20"/>
+        <TextBlock x:Name="headline_open" HorizontalAlignment="Left" Margin="537,27,0,0" TextWrapping="Wrap" Text="תקלות פתוחות" VerticalAlignment="Top" FontSize="20">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="#FF3E3E3E" Direction="201" Opacity="0.68" ShadowDepth="3" BlurRadius="6"/>
+            </TextBlock.Effect></TextBlock>
+        <TextBlock x:Name="headline_close" HorizontalAlignment="Left" Margin="136,27,0,0" TextWrapping="Wrap" Text="תקלות סגורות" VerticalAlignment="Top" FontSize="20">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="#FF3E3E3E" Direction="201" Opacity="0.68" ShadowDepth="3" BlurRadius="6"/>
+            </TextBlock.Effect></TextBlock>
         <Image x:Name="stateOfDB" HorizontalAlignment="Left" Height="30" Width="30" Margin="7,7,0,0" Grid.RowSpan="2" VerticalAlignment="Top" />
+        <Image x:Name="mals_img"  HorizontalAlignment="Left" Height="130" Margin="339,429,0,0" VerticalAlignment="Top" Width="130"/>
 
     </Grid>
 </UserControl>

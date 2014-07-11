@@ -27,6 +27,12 @@ namespace Management_System
         public Tenants()
         {
             InitializeComponent();
+            BitmapImage img = new BitmapImage();
+            img.BeginInit();
+            img.UriSource = new Uri(@"/Management_System;component/Resources/family.png", UriKind.Relative);
+            img.EndInit();
+            tenants_img.Source = img;
+
             if (SqlDB.isOnline)
             {
                 BitmapImage logo = new BitmapImage();

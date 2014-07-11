@@ -10,7 +10,7 @@
             <ColumnDefinition Width="721*"/>
             <ColumnDefinition Width="459*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.ColumnSpan="2" Margin="0,0,10,0">
+        <StackPanel Grid.ColumnSpan="2" Margin="7,7,3,-7">
         <DataGrid Name="dgUsers" SelectionUnit="Cell" SelectionMode="Single" AutoGenerateColumns="False" Margin="0,52,0,109" Grid.ColumnSpan="2" ItemsSource="{Binding listOfTenants}" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="דצמבר" Binding="{Binding December,Mode=TwoWay}" Width="*" />
@@ -30,11 +30,14 @@
             </DataGrid.Columns>
         </DataGrid>
         </StackPanel>
-        <Button x:Name="back_button" Content="חזרה" HorizontalAlignment="Left" Margin="562,487,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
-        <TextBlock x:Name="address_Reports_show" HorizontalAlignment="Left" Margin="637,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Button x:Name="save_button" Content="שמירה" Margin="451,487,195,0" VerticalAlignment="Top" Click="save_button_Click"/>
+        <Button x:Name="back_button" Content="חזרה" HorizontalAlignment="Left" Margin="111,487,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1" Grid.Column="1"/>
+        <TextBlock x:Name="address_Reports_show" HorizontalAlignment="Left" TextAlignment="Center" Margin="323,11,0,0" FontSize="24px" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="530">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="#FF3E3E3E" Direction="201" Opacity="0.68" ShadowDepth="3" BlurRadius="6"/>
+            </TextBlock.Effect></TextBlock>
+        <Button x:Name="save_button" Content="שמירה" Margin="573,487,73,0" VerticalAlignment="Top" Click="save_button_Click"/>
         <Image x:Name="stateOfDB" HorizontalAlignment="Left" Height="30" Width="30" Margin="7,7,0,0" Grid.RowSpan="2" VerticalAlignment="Top" />
-        <Button x:Name="print_report" Content="הדפס" HorizontalAlignment="Left" Margin="336,487,0,0" VerticalAlignment="Top" Width="75" Click="print_report_Click"/>
+        <Button x:Name="print_report" Content="הדפס" HorizontalAlignment="Left" Margin="337,487,0,0" VerticalAlignment="Top" Width="75" Click="print_report_Click"/>
     </Grid>
 
 </UserControl>

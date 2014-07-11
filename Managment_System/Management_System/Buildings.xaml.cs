@@ -29,6 +29,13 @@ namespace Management_System
         {
             
             InitializeComponent();//Initialize UC
+
+            BitmapImage pic = new BitmapImage();
+            pic.BeginInit();
+            pic.UriSource = new Uri(@"/Management_System;component/Resources/home.png", UriKind.Relative);
+            pic.EndInit();
+            building_img.Source = pic;
+
             if (SqlDB.isOnline)
             {
                 BitmapImage logo = new BitmapImage();

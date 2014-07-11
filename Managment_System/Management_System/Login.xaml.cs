@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -43,7 +44,7 @@ namespace Management_System
             pic2.EndInit();
             as_two.Source = pic2;
 
- //           this.Background = Brushes.Yellow;
+            //           this.Background = Brushes.Yellow;
             db = new SqlDB();
         }
 
@@ -52,6 +53,8 @@ namespace Management_System
         {
             var a = new loading();
             a.Show();
+            Dispatcher.Invoke(new Action(() => { }), DispatcherPriority.ContextIdle, null);
+            //connection();
             string user = textBok_user.Text.ToString().Trim();
             string password = textBox_password.Password;
             bool isValid = db.check_username(user, password);
@@ -64,9 +67,16 @@ namespace Management_System
                     MessageBox.Show("המערכת מחוברת לרשת בהצלחה");
                 else
                     MessageBox.Show("המערכת אינה מחוברת לאינטרנט, שים לב כי ניתן להשתמש בתוכנה אך לא ניתן לשמור שינויים");
-                   
+
                 Switcher.Switch(this, new MainMenu());
             }
         }
-    }
+
+     //   private void connection()
+      //  {
+       //     try_to_connect.Visibility = Visibility.Visible;
+        //    Dispatcher.Invoke(new Action(() => { }), DispatcherPriority.ContextIdle, null);
+       // }
+        
+        }
 }

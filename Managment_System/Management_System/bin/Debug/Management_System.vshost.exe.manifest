@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Management_System.exe" size="4266496">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Management_System.exe" size="4807680">
       <assemblyIdentity name="Management_System" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>pr6ht3YAO+Gv7mB97JkEqFDF4+79IfpCL+fUcEqw7hA=</dsig:DigestValue>
+        <dsig:DigestValue>xFewShSh+gR/d0Pej/Tf8SZBcib3L+j/K8WN7B7PeVY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

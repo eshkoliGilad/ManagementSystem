@@ -35,6 +35,11 @@ namespace Management_System
         public Reports()
         {
             InitializeComponent();
+            BitmapImage img = new BitmapImage();
+            img.BeginInit();
+            img.UriSource = new Uri(@"/Management_System;component/Resources/report.png", UriKind.Relative);
+            img.EndInit();
+            report_img.Source = img;
             if (SqlDB.isOnline)
             {
                 BitmapImage logo = new BitmapImage();

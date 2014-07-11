@@ -22,4 +22,7 @@
         <ComboBox x:Name="state_combox" HorizontalAlignment="Left" Margin="52,272,0,0" VerticalAlignment="Top" Width="118" SelectionChanged="state_combox_SelectionChanged" Loaded="ComboBox_Loaded_2"/>
 
     </Grid>
+    <Window.Background>
+        <ImageBrush ImageSource="/lightSilver.jpg" />
+    </Window.Background>
 </Window>

@@ -31,7 +31,11 @@ namespace Management_System
         public Malfunctions()
         {
             InitializeComponent();
-            
+            BitmapImage img = new BitmapImage();
+            img.BeginInit();
+            img.UriSource = new Uri(@"/Management_System;component/Resources/malfunction.png", UriKind.Relative);
+            img.EndInit();
+            mals_img.Source = img;
             if (SqlDB.isOnline)
             {
                 BitmapImage logo = new BitmapImage();

@@ -22,7 +22,10 @@
         </ListView>
         <Button x:Name="cmd_NewBuilding" Content="חדש" HorizontalAlignment="Left" Margin="686,317,0,0" VerticalAlignment="Top" Width="75" Click="cmd_NewBuilding_Click"/>
         <Button x:Name="cmd_EditBuilding" Content="מחק" HorizontalAlignment="Left" Margin="505,317,0,0" VerticalAlignment="Top" Width="75" Click="cmd_EditBuilding_Click"/>
-            <TextBlock x:Name="building_Address" FontSize="30" HorizontalAlignment="Left" Margin="206,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="254"/>
+        <TextBlock x:Name="building_Address" FontSize="30" HorizontalAlignment="Left" Margin="206,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="254">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="#FF3E3E3E" Direction="201" Opacity="0.68" ShadowDepth="3" BlurRadius="6"/>
+            </TextBlock.Effect></TextBlock>
         <TextBlock x:Name="account_Number" HorizontalAlignment="Left" Margin="374,100,0,0" TextWrapping="Wrap" Text=": מס' חשבון בנק" VerticalAlignment="Top"/>
         <TextBox x:Name="account_Number_field"  HorizontalAlignment="Left" Height="23" Margin="239,100,0,0" TextWrapping="Wrap" IsEnabled="False" VerticalAlignment="Top" Width="120"/>
         <TextBlock x:Name="floors_text" HorizontalAlignment="Left" Margin="400,150,0,0" TextWrapping="Wrap" Text=": מס' קומות" VerticalAlignment="Top"/>
@@ -51,6 +54,7 @@
         <Button x:Name="meetings" Content="אסיפות דיירים" HorizontalAlignment="Left" Margin="594,402,0,0" VerticalAlignment="Top" Width="167" Click="meetings_Click"/>
         <Button x:Name="print_building" Content="הדפס" HorizontalAlignment="Left" Margin="505,402,0,0" VerticalAlignment="Top" Width="75" Click="print_building_Click"/>
         <Image x:Name="stateOfDB" HorizontalAlignment="Left" Height="30" Width="30" Margin="7,7,0,0" Grid.RowSpan="2" VerticalAlignment="Top" />
+        <Image x:Name="building_img" HorizontalAlignment="Left" Height="120" Margin="10,75,0,0" VerticalAlignment="Top" Width="140"/>
 
     </Grid>
 </UserControl>
