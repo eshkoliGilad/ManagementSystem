@@ -19,10 +19,13 @@ namespace Management_System
     /// <summary>
     /// Interaction logic for new_malfunction.xaml
     /// </summary>
+    /// 
+    //Represent New Malfunction window
     public partial class new_malfunction : Window
     {
-        
         SqlDB db;
+
+        //New malfunction constructor
         public new_malfunction()
         {
             InitializeComponent();
@@ -30,50 +33,40 @@ namespace Management_System
         }
 
 
+        //Initial options loading - buildings
         private void ComboBox_Building_Loaded(object sender, RoutedEventArgs e)
         {
             List<string> data = new List<string>();
             data = db.combobox_building_load();
             var comboBox = sender as ComboBox;
-            
-
-            // ... Assign the ItemsSource to the List.
             comboBox.ItemsSource = data;
-
         }
 
-
+        //Initial types options loading
         private void ComboBox_Type_Loaded(object sender, RoutedEventArgs e)
         {
             var comboBox = sender as ComboBox;
             List<string> data = new List<string>();
-            data.Add("פיצוץ צינור מים");
-            data.Add("תקלת חשמל");
-            data.Add("גיזום עצים");
-            data.Add("נזילת גג");
+            data = db.UpdateMalsTypesList();
             comboBox.ItemsSource = data;
-
         }
-        
 
+        //Save button logic
         private void save_malfunctions_button_Click(object sender, RoutedEventArgs e)
         {
-
-          
             string[] list = new string[4];
             var comboBox = sender as ComboBox;
-   //         string type, building, desc,date;
             list[0] = DateTime.Now.ToString("dd-MM-yyyy");
-            list[1]= combobox_type_mal.SelectedValue.ToString();
-            list[2] = combobox_building_mal.SelectedValue.ToString();
+            list[2] = combobox_type_mal.SelectedValue.ToString();
+            list[1] = combobox_building_mal.SelectedValue.ToString();
             list[3] = description_mal_box.Text.ToString();
-             try
+            try
             {
                 db.save_Malfunction(list);
             }
+            catch (Exception ex) { throw new Exception("Error saving Malfunction", ex); }
             finally
             {
-                
                 MessageBox.Show(".תקלה חדשה נשמרה בהצלחה"); //Save stats in DB and refresh list !!!!
                 Switcher.Switch(new Malfunctions());
                 this.Close();

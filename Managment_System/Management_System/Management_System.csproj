@@ -111,6 +111,9 @@
     <Compile Include="Buildings_report.xaml.cs">
       <DependentUpon>Buildings_report.xaml</DependentUpon>
     </Compile>
+    <Compile Include="description.xaml.cs">
+      <DependentUpon>description.xaml</DependentUpon>
+    </Compile>
     <Compile Include="exit_query.xaml.cs">
       <DependentUpon>exit_query.xaml</DependentUpon>
     </Compile>
@@ -192,7 +195,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dictionary1.xaml">
+    <Page Include="description.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -348,9 +351,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\companyLogo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="DarkBlue.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="lightSilver.jpg" />

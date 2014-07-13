@@ -10,27 +10,9 @@ using MySql.Data.MySqlClient;
 namespace Management_System
 {
 
-
-    /// <summary>
-    /// /
-    /// ///
-    /// /
-    /// /
-    /// /
-    /// /
-    /// CHECK IF THERE IS ONLINE AND OFFLINE IN EVERY(!) FUNCTION BEFORE THERE ARE NEW FUNCTIONS HERE !
-    /// /
-    /// /
-    /// /
-    /// /
-    /// /
-    /// /
-    /// /
-    /// /
-    /// </summary>
+    //Represent DBA class for the application
     public class SqlDB
-    {
-        
+    {        
         List<string> items;
         List<Malfunctions.Malfunction> itemsMals;
         List<meetings.Meeting> items1;
@@ -38,15 +20,16 @@ namespace Management_System
         MySqlConnection con;
         public static bool isOnline = false;
         
+        //SQL constructor - configuration
         public SqlDB()
         {
             con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
         }
 
+        //Delete Meeting function
         public void deleteMeeting(string notes, string date)
         {
-
             string sqlIns = "DELETE FROM meetings WHERE explanation=@notes AND date=@date";
             if (isOnline)
             {
@@ -58,6 +41,7 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@date", date);
                     cmdIns.ExecuteNonQuery();
                 }
+                catch (Exception ex) { throw new Exception("Online Database connection error", ex); }
                 finally
                 {
                     con.Close();
@@ -73,6 +57,7 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@date", date);
                     cmdIns.ExecuteNonQuery();
                 }
+                catch (Exception ex) { throw new Exception("Local Database connection error", ex); }
                 finally
                 {
                     conLocal.Close();
@@ -80,9 +65,10 @@ namespace Management_System
             }
         }
 
+
+        //Saving Malfunction function
         public void save_Malfunction(string[] list)
         {
-
             if (isOnline)
             {
                 con.Open();
@@ -93,7 +79,7 @@ namespace Management_System
                 while (reader.Read()) //for writing
                 {
                     if (rows < Convert.ToInt32(reader[4].ToString()))
-                        rows = Convert.ToInt32(reader[4].ToString());
+                          rows = Convert.ToInt32(reader[4].ToString());
                 }
                 rows++;
                 string state;//, type, building, desc,date;
@@ -112,6 +98,7 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@id", rows);
                     cmdIns.ExecuteNonQuery();
                 }
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
                 finally
                 {
                     con.Close();
@@ -146,6 +133,7 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@id", rows);
                     cmdIns.ExecuteNonQuery();
                 }
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
                 finally
                 {
                     conLocal.Close();
@@ -196,6 +184,7 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@state", "close");
                     int t = cmdIns.ExecuteNonQuery();
                 }
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
                 finally
                 {
                     con.Close();
@@ -210,6 +199,7 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@state", "close");
                     int t = cmdIns.ExecuteNonQuery();
                 }
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
                 finally
                 {
                     conLocal.Close();
@@ -234,6 +224,7 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@id", temp);
                     int t = cmdIns.ExecuteNonQuery();
                 }
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
                 finally
                 {
                     con.Close();
@@ -248,6 +239,7 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@id", temp);
                     int t = cmdIns.ExecuteNonQuery();
                 }
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
                 finally
                 {
                     conLocal.Close();
@@ -273,7 +265,7 @@ namespace Management_System
                     int t = cmdIns.ExecuteNonQuery();
 
                 }
-
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
                 finally
                 {
                     con.Close();
@@ -290,7 +282,7 @@ namespace Management_System
                     int t = cmdIns.ExecuteNonQuery();
 
                 }
-
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
                 finally
                 {
                     conLocal.Close();
@@ -354,8 +346,6 @@ namespace Management_System
         {
             itemsMals = new List<Malfunctions.Malfunction>();
             string type, building_mal, date;
-            //con = new MySqlConnection();
-            //con.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             if (isOnline)
             {
                 con.Open();
@@ -433,7 +423,7 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@date", s5);
                     cmdIns.ExecuteNonQuery();
                 }
-
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
                 finally
                 {
 
@@ -472,7 +462,7 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@building", s2);
                     cmdIns.ExecuteNonQuery();
                 }
-
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
                 finally
                 {
 
@@ -544,7 +534,7 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@dec", s19);
                     cmdIns.ExecuteNonQuery();
                 }
-
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
                 finally
                 {
 
@@ -555,8 +545,69 @@ namespace Management_System
         }
 
 
+        public void copyDataBasesOfMalsTypes()
+        {
+            string s = "";
+            con.Open();
+            conLocal.Open();
+            string deleteSQL = "DELETE FROM mal_types";
+            SqlCommand cmd2 = new SqlCommand(deleteSQL, conLocal);
+            cmd2.ExecuteNonQuery();
 
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM mal_types", con);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                s = reader[0].ToString().Trim();
+                string sqlIns = "INSERT INTO mal_types (type) VALUES (@type)";
 
+                try
+                {
+                    SqlCommand cmdIns = new SqlCommand(sqlIns, conLocal);
+                    cmdIns.Parameters.AddWithValue("@type", s);
+                    cmdIns.ExecuteNonQuery();
+                }
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
+                finally
+                {
+
+                }
+            }
+            con.Close();
+            conLocal.Close();
+        }
+
+        public void copyDataBasesOfTypes()
+        {
+            string s = "";
+            con.Open();
+            conLocal.Open();
+            string deleteSQL = "DELETE FROM appartment_state";
+            SqlCommand cmd2 = new SqlCommand(deleteSQL, conLocal);
+            cmd2.ExecuteNonQuery();
+
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM appartment_state", con);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                s = reader[0].ToString().Trim();
+                string sqlIns = "INSERT INTO appartment_state (type) VALUES (@type)";
+
+                try
+                {
+                    SqlCommand cmdIns = new SqlCommand(sqlIns, conLocal);
+                    cmdIns.Parameters.AddWithValue("@type", s);
+                    cmdIns.ExecuteNonQuery();
+                }
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
+                finally
+                {
+
+                }
+            }
+            con.Close();
+            conLocal.Close();
+        }
 
 
         public void copyDataBasesOfBuildings()
@@ -609,7 +660,7 @@ namespace Management_System
                         cmdIns.Parameters.AddWithValue("@IsBasement", s13);
                         cmdIns.ExecuteNonQuery();
                     }
-
+                    catch (Exception ex) { throw new Exception("Database connection error", ex); }
                     finally
                     {
                         
@@ -620,28 +671,7 @@ namespace Management_System
         }
 
         public void addMeeting(string[] listOfParameters)
-        {
-            //try
-            //{
-               // con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-              //  con.Open();
-             //   isOnline = true;
-            //}
-           // catch
-          //  {
-             //   isOnline = false;
-             //   conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
-             //   try
-             //   {
-             //       conLocal.Open();
-              //  }
-              //  catch
-             //   {
-            //        //SHOW MESSAGE IN OTHER CLASS OR SOMETHING LIKE THAT     
-             //   }
-            //}
-           
-            
+        {            
             string sqlIns = "INSERT INTO meetings (building,explanation,date) VALUES (@building,@explanation,@date)";
             if (isOnline)
             {
@@ -654,6 +684,7 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@date", listOfParameters[2]);
                     cmdIns.ExecuteNonQuery();
                 }
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
                 finally
                 {
                     con.Close();
@@ -670,6 +701,7 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@date", listOfParameters[2]);
                     cmdIns.ExecuteNonQuery();
                 }
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
                 finally
                 {
                     conLocal.Close();
@@ -731,6 +763,7 @@ namespace Management_System
               con.Open();
                isOnline = true;
             }
+
              catch
               {
               isOnline = false;
@@ -762,10 +795,12 @@ namespace Management_System
                     }
                 }
                 con.Close();
-                copyDataBasesOfBuildings(); //WORKING ?!?
+                copyDataBasesOfBuildings();
                 copyDataBasesOfTenants();
                 copyDataBasesOfMeeting();
                 copyDataBasesOfMalfunctions();
+                copyDataBasesOfTypes();
+                copyDataBasesOfMalsTypes();
                 
             }
 
@@ -790,25 +825,7 @@ namespace Management_System
         }
         public void add_new_building(string[] listOfParameters)
         {
-            //try
-            //{
-            // con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            //  con.Open();
-            //   isOnline = true;
-            //}
-            // catch
-            //  {
-            //   isOnline = false;
-            //   conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
-            //   try
-            //   {
-            //       conLocal.Open();
-            //  }
-            //  catch
-            //   {
-            //        //SHOW MESSAGE IN OTHER CLASS OR SOMETHING LIKE THAT     
-            //   }
-            //}
+            
             string sqlIns = "INSERT INTO buildings (Address,Account,floors,tenants,for_whom,gardner,gardner_phone,elevator_num,heating_type,service_type,IsElevator,IsGarden,IsHeating,IsBasement) VALUES (@Address,@Account,@floors,@tenants,@for_whom,@gardner,@gardner_phone,@elevator_num,@heating_type,@service_type,@IsElevator,@IsGarden,@IsHeating,@IsBasement)";
             if (isOnline)
             {
@@ -833,6 +850,7 @@ namespace Management_System
                 cmdIns.Parameters.AddWithValue("@IsBasement", listOfParameters[13]);
                 cmdIns.ExecuteNonQuery();
             }
+            catch (Exception ex) { throw new Exception("Database connection error", ex); }
             finally
             {
                 con.Close();
@@ -861,6 +879,7 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@IsBasement", listOfParameters[13]);
                     cmdIns.ExecuteNonQuery();
                 }
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
                 finally
                 {
                     conLocal.Close();
@@ -874,28 +893,7 @@ namespace Management_System
         public List<string> UpdateBuildingsList()
         {
             items = new List<string>();
-            //try
-            //{
-            // con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            //  con.Open();
-            //   isOnline = true;
-            //}
-            // catch
-            //  {
-            //   isOnline = false;
-            //   conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
-            //   try
-            //   {
-            //       conLocal.Open();
-            //  }
-            //  catch
-            //   {
-            //        //SHOW MESSAGE IN OTHER CLASS OR SOMETHING LIKE THAT     
-            //   }
-            //}
             
-            
-            //con.Open();
             if (isOnline)
             {
                 con.Open();
@@ -924,31 +922,73 @@ namespace Management_System
             }
         }
 
+        public List<string> UpdateMalsTypesList()
+        {
+            items = new List<string>();
 
-        
+            if (isOnline)
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM mal_types ", con);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    string address = reader[0].ToString().Trim();
+                    items.Add(address);
+                }
+                con.Close();
+                return items;
+            }
+            else
+            {
+                conLocal.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM mal_types ", conLocal);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    string address = reader[0].ToString().Trim();
+                    items.Add(address);
+                }
+                conLocal.Close();
+                return items;
+            }
+
+        }
+        public List<string> UpdateTypesList()
+        {
+            items = new List<string>();
+
+            if (isOnline)
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM appartment_state ", con);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    string address = reader[0].ToString().Trim();
+                    items.Add(address);
+                }
+                con.Close();
+                return items;
+            }
+            else
+            {
+                conLocal.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM appartment_state ", conLocal);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    string address = reader[0].ToString().Trim();
+                    items.Add(address);
+                }
+                conLocal.Close();
+                return items;
+            }
+        }
 
         public List<string> getAllBuildingInfo(string name)
         {
             items = new List<string>();
-            //try
-            //{
-            // con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            //  con.Open();
-            //   isOnline = true;
-            //}
-            // catch
-            //  {
-            //   isOnline = false;
-            //   conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
-            //   try
-            //   {
-            //       conLocal.Open();
-            //  }
-            //  catch
-            //   {
-            //        //SHOW MESSAGE IN OTHER CLASS OR SOMETHING LIKE THAT     
-            //   }
-            //}
             if (isOnline)
             {
                 con.Open();
@@ -1034,25 +1074,6 @@ namespace Management_System
         
         public void deleteBuilding(string name)
         {
-            //try
-            //{
-            // con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            //  con.Open();
-            //   isOnline = true;
-            //}
-            // catch
-            //  {
-            //   isOnline = false;
-            //   conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
-            //   try
-            //   {
-            //       conLocal.Open();
-            //  }
-            //  catch
-            //   {
-            //        //SHOW MESSAGE IN OTHER CLASS OR SOMETHING LIKE THAT     
-            //   }
-            //}
             if (isOnline)
             {
                 con.Open();
@@ -1068,7 +1089,6 @@ namespace Management_System
                        "DELETE FROM malfunctions WHERE building='" + name + "'",
                          con); //DELETE ALL MALFUNCTIONS FROM THAT BUILDING
 
-                //NEEDS TO DELETE ITS EXCEL FORM !!!
                 cmd.ExecuteNonQuery();
                 cmd1.ExecuteNonQuery();
                 cmd2.ExecuteNonQuery();
@@ -1101,25 +1121,6 @@ namespace Management_System
 
         public void updateBuilding(List<string> list, string id)
         {
-            //try
-            //{
-            // con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            //  con.Open();
-            //   isOnline = true;
-            //}
-            // catch
-            //  {
-            //   isOnline = false;
-            //   conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
-            //   try
-            //   {
-            //       conLocal.Open();
-            //  }
-            //  catch
-            //   {
-            //        //SHOW MESSAGE IN OTHER CLASS OR SOMETHING LIKE THAT     
-            //   }
-            //}
             if (isOnline)
             {
                 string sqlIns = "UPDATE buildings SET Address=@address,Account=@account,floors=@floors, tenants=@tenants,for_whom=@for_whom,gardner=@gardner,gardner_phone=@gardner_phone,elevator_num=@elevator_num,heating_type=@heating_type,service_type=@service_type,IsElevator=@IsElevator,IsGarden=@IsGarden,IsHeating=@IsHeating,IsBasement=@IsBasement WHERE Address=@id";
@@ -1193,25 +1194,7 @@ namespace Management_System
         {
             List <Tenants.Tenant> list = new List<Tenants.Tenant>();
             string name, building_name, appartment_number, phone, state;
-            //try
-            //{
-            // con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            //  con.Open();
-            //   isOnline = true;
-            //}
-            // catch
-            //  {
-            //   isOnline = false;
-            //   conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
-            //   try
-            //   {
-            //       conLocal.Open();
-            //  }
-            //  catch
-            //   {
-            //        //SHOW MESSAGE IN OTHER CLASS OR SOMETHING LIKE THAT     
-            //   }
-            //}
+
             if (isOnline)
             {
                 con.Open();
@@ -1268,25 +1251,7 @@ namespace Management_System
             List<Tenants.Tenant> list = new List<Tenants.Tenant>();
             string name, appartment_number, january, feb, mar, apr, may, june, july, aug, sep, oct, nov, dec;
             address = address.Trim();
-            //try
-            //{
-            // con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            //  con.Open();
-            //   isOnline = true;
-            //}
-            // catch
-            //  {
-            //   isOnline = false;
-            //   conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
-            //   try
-            //   {
-            //       conLocal.Open();
-            //  }
-            //  catch
-            //   {
-            //        //SHOW MESSAGE IN OTHER CLASS OR SOMETHING LIKE THAT     
-            //   }
-            //}
+
             if (isOnline)
             {
                 con.Open();
@@ -1374,25 +1339,6 @@ namespace Management_System
 
         public void deleteTenant(string name)
         {
-            //try
-            //{
-            // con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            //  con.Open();
-            //   isOnline = true;
-            //}
-            // catch
-            //  {
-            //   isOnline = false;
-            //   conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
-            //   try
-            //   {
-            //       conLocal.Open();
-            //  }
-            //  catch
-            //   {
-            //        //SHOW MESSAGE IN OTHER CLASS OR SOMETHING LIKE THAT     
-            //   }
-            //}
             if (isOnline)
             {
                 con.Open();
@@ -1415,25 +1361,7 @@ namespace Management_System
         {
             string[] tempList = new string[8];
             string address = name;
-            //try
-            //{
-            // con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            //  con.Open();
-            //   isOnline = true;
-            //}
-            // catch
-            //  {
-            //   isOnline = false;
-            //   conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
-            //   try
-            //   {
-            //       conLocal.Open();
-            //  }
-            //  catch
-            //   {
-            //        //SHOW MESSAGE IN OTHER CLASS OR SOMETHING LIKE THAT     
-            //   }
-            //}
+
             if (isOnline)
             {
                 con.Open();
@@ -1474,31 +1402,8 @@ namespace Management_System
             }
         }
 
-
-
-
-
-        public void updateTenantOfReports(string[] list, int year) //???????????????????????????????????????????????
+        public void updateTenantOfReports(string[] list, int year)
         {
-            //try
-            //{
-            // con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            //  con.Open();
-            //   isOnline = true;
-            //}
-            // catch
-            //  {
-            //   isOnline = false;
-            //   conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
-            //   try
-            //   {
-            //       conLocal.Open();
-            //  }
-            //  catch
-            //   {
-            //        //SHOW MESSAGE IN OTHER CLASS OR SOMETHING LIKE THAT     
-            //   }
-            //}
             string sqlIns = "UPDATE tenants SET january" + year + "=@jan,february" + year + "=@feb,march" + year + "=@mar, april" + year + "=@apr,may" + year + "=@may,june" + year + "=@jun,july" + year + "=@jul,august" + year + "=@aug, september" + year + "=@sep, october" + year + "=@oct, november" + year + "=@nov, december" + year + "=@dec WHERE name=@name";
 
             if (isOnline)
@@ -1522,13 +1427,11 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@name", list[1]);
 
                     int t = cmdIns.ExecuteNonQuery();
-
                 }
 
                 finally
                 {
                     con.Close();
-
                 }
             }
             else
@@ -1566,16 +1469,6 @@ namespace Management_System
 
 
 
-        /// <summary>
-        /// ///////
-        /// </summary>
-        /// <param name="list"></param>
-        /// <param name="address"></param>
-
-
-
-
-
 
 
 
@@ -1584,25 +1477,6 @@ namespace Management_System
         {
             
             string sqlIns = "UPDATE tenants SET name=@name,building=@building,floor_number=@floor, phoner_number=@phone,cellphone_number=@cellphone,email_address=@email,appartment_state=@state,appartent_number=@app_number WHERE name=@id";
-            //try
-            //{
-            // con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            //  con.Open();
-            //   isOnline = true;
-            //}
-            // catch
-            //  {
-            //   isOnline = false;
-            //   conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
-            //   try
-            //   {
-            //       conLocal.Open();
-            //  }
-            //  catch
-            //   {
-            //        //SHOW MESSAGE IN OTHER CLASS OR SOMETHING LIKE THAT     
-            //   }
-            //}
             if (isOnline)
             {
                 try
@@ -1619,14 +1493,12 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@app_number", list[6]);
                     cmdIns.Parameters.AddWithValue("@id", address);
                     int t = cmdIns.ExecuteNonQuery();
-
                 }
 
                 finally
                 {
                     con.Close();
                     Switcher.Switch(new Tenants());
-
                 }
             }
             else
@@ -1645,7 +1517,6 @@ namespace Management_System
                     cmdIns.Parameters.AddWithValue("@app_number", list[6]);
                     cmdIns.Parameters.AddWithValue("@id", address);
                     int t = cmdIns.ExecuteNonQuery();
-
                 }
 
                 finally
@@ -1660,25 +1531,7 @@ namespace Management_System
 
         public void saveTenant(string [] list)
         {
-            //try
-            //{
-            // con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            //  con.Open();
-            //   isOnline = true;
-            //}
-            // catch
-            //  {
-            //   isOnline = false;
-            //   conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
-            //   try
-            //   {
-            //       conLocal.Open();
-            //  }
-            //  catch
-            //   {
-            //        //SHOW MESSAGE IN OTHER CLASS OR SOMETHING LIKE THAT     
-            //   }
-            //}
+
             string sqlIns = "INSERT INTO tenants (name,building, floor_number, phoner_number, cellphone_number, email_address, appartment_state, appartent_number) VALUES (@name, @building, @floor, @phone, @cellphone, @email, @state, @appar_number)";
             if (isOnline)
             {

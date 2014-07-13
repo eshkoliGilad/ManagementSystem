@@ -23,9 +23,12 @@ namespace Management_System
     {
         SqlDB db;
 
+        //This class represent Login window
         public Login()
         {
+            db = new SqlDB();
             InitializeComponent();
+
             BitmapImage pic = new BitmapImage();
             pic.BeginInit();
             pic.UriSource = new Uri(@"/Management_System;component/Resources/companyLogo.png", UriKind.Relative);
@@ -43,22 +46,19 @@ namespace Management_System
             pic2.UriSource = new Uri(@"/Management_System;component/Resources/as2.png", UriKind.Relative);
             pic2.EndInit();
             as_two.Source = pic2;
-
-            //           this.Background = Brushes.Yellow;
-            db = new SqlDB();
         }
 
 
+        //Login button logic
         private void login_button(object sender, RoutedEventArgs e) //Check if username and password is valid
         {
-            var a = new loading();
-            a.Show();
-            Dispatcher.Invoke(new Action(() => { }), DispatcherPriority.ContextIdle, null);
-            //connection();
+            var loading = new loading();
+            loading.Show();
             string user = textBok_user.Text.ToString().Trim();
             string password = textBox_password.Password;
+            Dispatcher.Invoke(new Action(() => { }), DispatcherPriority.ContextIdle, null);
             bool isValid = db.check_username(user, password);
-            a.Close();
+            loading.Close();
             if (isValid == false)
                 MessageBox.Show("שם משתמש או סיסמא לא נכונים. נסה שוב");
             else
@@ -71,12 +71,5 @@ namespace Management_System
                 Switcher.Switch(this, new MainMenu());
             }
         }
-
-     //   private void connection()
-      //  {
-       //     try_to_connect.Visibility = Visibility.Visible;
-        //    Dispatcher.Invoke(new Action(() => { }), DispatcherPriority.ContextIdle, null);
-       // }
-        
-        }
+    }
 }

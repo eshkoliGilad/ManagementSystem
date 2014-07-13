@@ -57,3 +57,5 @@ C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\Management_System.csprojResolveAssemblyReference.cache
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\loading.baml
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\loading.g.cs
+C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\description.baml
+C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\description.g.cs

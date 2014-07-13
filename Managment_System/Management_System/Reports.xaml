@@ -21,8 +21,7 @@
             </ListView.View>
         </ListView>
         <Button x:Name="quit_button" Content="יציאה" HorizontalAlignment="Left" Margin="218,482,0,0" VerticalAlignment="Top" Width="75" Click="quit_button_Click"/>
-        <Button x:Name="open_button" Content="פתח" HorizontalAlignment="Left" Margin="622,153,0,0" VerticalAlignment="Top" Width="75" Click="open_button_Click"/>
-        <Button x:Name="print_button" Content="הדפס" HorizontalAlignment="Left" Margin="622,326,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="open_button" Content="פתח" HorizontalAlignment="Left" Margin="618,241,0,0" VerticalAlignment="Top" Width="75" Click="open_button_Click"/>
         <Image x:Name="stateOfDB" HorizontalAlignment="Left" Height="30" Width="30" Margin="7,7,0,0" Grid.RowSpan="2" VerticalAlignment="Top" />
         <Image x:Name="report_img" HorizontalAlignment="Left" Height="194" Margin="32,147,0,0" VerticalAlignment="Top" Width="184"/>
 

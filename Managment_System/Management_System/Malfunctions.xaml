@@ -6,8 +6,44 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
+        <DataGrid x:Name="datagrid" Visibility="Hidden" Height="1000px" HorizontalAlignment="Center" HorizontalContentAlignment="Center" ColumnWidth="*" VerticalAlignment="Top" DataContext="{Binding Source=list}"  AutoGenerateColumns="False" CanUserResizeColumns="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="תיאור" Binding="{Binding Path=description}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="תאריך"   Binding="{Binding Path=date}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="סוג" Binding="{Binding Path=type}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="בניין" Binding="{Binding Path=building}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button x:Name="back_button" Content="חזרה" HorizontalAlignment="Left" Margin="672,503,0,0" VerticalAlignment="Top" Width="75" Click="back_button_Click"/>
-        <ListView x:Name="closedMalslvDataBinding" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Height="306" Margin="5,64,0,0" VerticalAlignment="Top" Width="375" SelectionChanged="closedMalslvDataBinding_SelectionChanged">
+        <ListView x:Name="closedMalslvDataBinding"  MouseDoubleClick="malsClosed_MouseDoubleClick" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Height="306" Margin="5,64,0,0" VerticalAlignment="Top" Width="375" SelectionChanged="closedMalslvDataBinding_SelectionChanged">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="VerticalContentAlignment" Value="Top" />
@@ -22,7 +58,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="openMalslvDataBinding" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Height="306" Margin="405,64,0,0" VerticalAlignment="Top" Width="375" SelectionChanged="openMalslvDataBinding_SelectionChanged">
+        <ListView x:Name="openMalslvDataBinding" HorizontalAlignment="Left" MouseDoubleClick="malsOpen_MouseDoubleClick" HorizontalContentAlignment="Right" Height="306" Margin="405,64,0,0" VerticalAlignment="Top" Width="375" SelectionChanged="openMalslvDataBinding_SelectionChanged">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="VerticalContentAlignment" Value="Top" />
@@ -53,6 +89,5 @@
             </TextBlock.Effect></TextBlock>
         <Image x:Name="stateOfDB" HorizontalAlignment="Left" Height="30" Width="30" Margin="7,7,0,0" Grid.RowSpan="2" VerticalAlignment="Top" />
         <Image x:Name="mals_img"  HorizontalAlignment="Left" Height="130" Margin="339,429,0,0" VerticalAlignment="Top" Width="130"/>
-
     </Grid>
 </UserControl>

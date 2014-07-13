@@ -24,12 +24,14 @@ namespace Management_System
             InitializeComponent();
         }
 
+        //If user choosen to exit, shutdown application
         private void OK_button_Click(object sender, RoutedEventArgs e)
         {
             this.Content = null;
             Application.Current.Shutdown();
         }
 
+        //Close exit window if user cancled the operation
         private void cancel_button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

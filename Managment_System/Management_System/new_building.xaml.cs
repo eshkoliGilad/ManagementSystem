@@ -26,6 +26,8 @@ namespace Management_System
         SqlDB db;
         string[] list;
         List<string> info, updatedInfo;
+
+        //New building constructor for creating new building
         public new_building()
         {
             InitializeComponent();
@@ -33,6 +35,7 @@ namespace Management_System
             db = new SqlDB();
         }
 
+        //New building constructor for editing exists buildings
         public new_building(string address)
         {
             InitializeComponent();
@@ -71,8 +74,7 @@ namespace Management_System
                 basement_checkbox.IsChecked= false;
         }
 
-
-
+        //Save buildingss information in DB
         private void new_save_Click(object sender, RoutedEventArgs e)
         {
             list[0] = address_box.Text.ToString().Trim();
@@ -112,15 +114,13 @@ namespace Management_System
             }
               
             Switcher.Switch(new Buildings());
-            this.Close();
-            
+            this.Close();    
         }
+
+        //Close Window
         private void new_abort_Click(object sender, RoutedEventArgs e)
         {
-            this.Close(); //Close window
+            this.Close();
         }
-
-
-
     }
 }

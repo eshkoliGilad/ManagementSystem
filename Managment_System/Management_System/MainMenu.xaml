@@ -15,7 +15,7 @@
             <RowDefinition Height="0*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-       
+
         <Button x:Name="buildings_button" Content="בניינים" HorizontalAlignment="Left" Margin="631,240,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="22" Click="buildings_button_Click"/>
         <Button x:Name="attendence_button" Content="דיירים" HorizontalAlignment="Left" Margin="457,240,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="22" Click="attendence_button_Click"/>
         <Button x:Name="reports_button" Content="דוחות" HorizontalAlignment="Left" Margin="277,240,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="22" Click="reports_button_Click"/>
@@ -24,7 +24,5 @@
         <Button x:Name="exit_button" Content="יציאה" HorizontalAlignment="Left" Margin="30,516,0,0" VerticalAlignment="Top" Width="75" Click="exit_button_Click" Grid.Row="1" Height="22"/>
         <Image x:Name="logo_menu" HorizontalAlignment="Left" Height="168" Margin="319,50,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="175" />
         <Image x:Name="stateOfDB" HorizontalAlignment="Left" Height="30" Width="30" Margin="7,7,0,0" Grid.RowSpan="2" VerticalAlignment="Top" />
-
-
     </Grid>
 </UserControl>

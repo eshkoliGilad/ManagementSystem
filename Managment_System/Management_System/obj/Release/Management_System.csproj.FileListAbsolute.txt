@@ -27,7 +27,6 @@ C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\Themes\ShinyBlue.baml
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\Themes\ShinyRed.baml
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\Themes\WhistlerBlue.baml
-C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\App.baml
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\Buildings.g.cs
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\Buildings_report.g.cs
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\exit_query.g.cs
@@ -54,6 +53,7 @@ C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\Management_System.exe
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\Management_System.pdb
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\Management_System.csprojResolveAssemblyReference.cache
-C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\Dictionary1.baml
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\loading.baml
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\loading.g.cs
+C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\description.baml
+C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Release\description.g.cs

@@ -8,9 +8,9 @@ using System.ComponentModel;
 
 namespace Management_System
 {
+    //Represnet Timer ticking class
     public class Ticker : INotifyPropertyChanged
     {
-        
         Timer timer;
         public Ticker()
         {
@@ -20,6 +20,7 @@ namespace Management_System
             timer.Start();
         }
 
+        //Get the date of now
         public DateTime Now
         {
             get { return DateTime.Now; }
@@ -30,7 +31,6 @@ namespace Management_System
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs("Now"));
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

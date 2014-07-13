@@ -19,20 +19,25 @@ namespace Management_System
     /// <summary>
     /// Interaction logic for new_tenant.xaml
     /// </summary>
-    /// 
+    ///
+ 
+    //Represent new Tenant Window
     public partial class new_tenant : Window
     {
         SqlDB db;
         string address = "";
         bool flag;
-        public new_tenant() //New Tenant
+
+        //New Tenant Constructor
+        public new_tenant() 
         {
             db = new SqlDB();
             InitializeComponent();
             flag = false;
         }
 
-        public new_tenant(string name) //Edit Tenant
+        //Edit existing Tenant costructor
+        public new_tenant(string name) 
         {
             
             InitializeComponent();
@@ -55,20 +60,16 @@ namespace Management_System
         private void save_tenant_Click(object sender, RoutedEventArgs e)
         {
             if (name_of_tenant_box.Text.ToString().Equals("") && !building_combox.Text.ToString().Equals(""))
-            {
                 MessageBox.Show("הכנס שם של דייר");
-            }
+            
             else if (name_of_tenant_box.Text.ToString().Equals("") && building_combox.Text.ToString().Equals(""))
-            {
                 MessageBox.Show("הכנס שם של דייר ובחר בניין");
-            }
+            
             else if (!name_of_tenant_box.Text.ToString().Equals("") && building_combox.Text.ToString().Equals(""))
-            {
                 MessageBox.Show("בחר בניין");
-            }
+            
             else
             {
-
                 string name = name_of_tenant_box.Text.ToString();
                 string building = building_combox.Text.ToString();
                 string floor = floor_number_tenants.Text.ToString();
@@ -78,7 +79,7 @@ namespace Management_System
                 string appartment_number = appartment_number_box.Text.ToString();
                 string mail = email_box.Text.ToString();
 
-                if (flag == false)
+                if (flag == false) //if it a new tenant
                 {
                     string [] list = new string [8];
                     list[0] = name;
@@ -91,10 +92,10 @@ namespace Management_System
                     list[7] = mail;
 
                     db.saveTenant(list);
-                    MessageBox.Show(".דייר חדש נשמר בהצלחה"); //Save stats in DB and refresh list !!!!
+                    MessageBox.Show(".דייר חדש נשמר בהצלחה"); 
                     this.Close();
                 }
-                else
+                else //Editing existing tenant
                 {
                     string[] list = new string[8];
                     list[0] = name;
@@ -106,17 +107,20 @@ namespace Management_System
                     list[6] = appartment_number;
                     list[7] = mail;
                     db.updateTenant(list, address);
-                    MessageBox.Show(".דייר עודכן בהצלחה"); //Save stats in DB and refresh list !!!!
+                    MessageBox.Show(".דייר עודכן בהצלחה"); 
                     this.Close();
                 }
             }
         }
+
+
+        //Selection Changed in combobox
         private void building_combox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            //Do nothing
         }
 
-
+        //Combobox buildings loading options
         private void ComboBox_Loaded(object sender, RoutedEventArgs e)
         {
             var comboBox = sender as ComboBox;
@@ -125,21 +129,19 @@ namespace Management_System
             comboBox.ItemsSource = data;   
         }
 
+        //Changing state combobox
         private void state_combox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            //Do nothing
         }
 
-        private void ComboBox_Loaded_2(object sender, RoutedEventArgs e) //Loading options for appartment's state
+        //Loading appartment's state options in combobox
+        private void ComboBox_Loaded_2(object sender, RoutedEventArgs e) 
         {
             var comboBox = sender as ComboBox;
             List<string> data = new List<string>();
-            data.Add("נטוש");
-            data.Add("תקין");
-            data.Add("בשיפוץ");
+            data = db.UpdateTypesList();
             comboBox.ItemsSource = data;
         }
-        
-        
     }
 }

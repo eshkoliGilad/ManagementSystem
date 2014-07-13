@@ -10,7 +10,6 @@
         <ComboBox x:Name="combobox_type_mal" HorizontalAlignment="Left" Margin="105,88,0,0" VerticalAlignment="Top" Width="136" Loaded="ComboBox_Type_Loaded"/>
         <ComboBox x:Name="combobox_building_mal" HorizontalAlignment="Left" Margin="105,41,0,0" VerticalAlignment="Top" Width="136" Loaded="ComboBox_Building_Loaded"/>
         <TextBox x:Name="description_mal_box" HorizontalAlignment="Left" Height="153" Margin="41,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-
     </Grid>
     <Window.Background>
         <ImageBrush ImageSource="/lightSilver.jpg" />

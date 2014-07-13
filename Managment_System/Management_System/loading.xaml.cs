@@ -17,21 +17,17 @@ namespace Management_System
     /// <summary>
     /// Interaction logic for loading.xaml
     /// </summary>
+    //This class represent Loading window during connection time
     public partial class loading : Window
     {
-
+        BitmapImage logo;
         public loading()
         {
             InitializeComponent();
-            BitmapImage logo = new BitmapImage();
+            logo = new BitmapImage();
             logo.BeginInit();
             logo.UriSource = new Uri(@"/Management_System;component/Resources/world.png", UriKind.Relative);
             logo.EndInit();
-            BitmapImage ball = new BitmapImage();
-            ball.BeginInit();
-            ball.UriSource = new Uri(@"/Management_System;component/Resources/ball.png", UriKind.Relative);
-            ball.EndInit();
-
             world.Source = logo;
             Dispatcher.Invoke(new Action(() => { }), DispatcherPriority.ContextIdle, null);
         }

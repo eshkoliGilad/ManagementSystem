@@ -11,7 +11,7 @@
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.View>
-                
+
                 <GridView>
                     <GridViewColumn Header="הערות" Width="270" DisplayMemberBinding="{Binding notes}"/>
                     <GridViewColumn Header="תאריך" Width="120" DisplayMemberBinding="{Binding date}"/>

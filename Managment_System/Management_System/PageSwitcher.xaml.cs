@@ -24,20 +24,17 @@ namespace Management_System
     {
         public PageSwitcher()
         {
-
             InitializeComponent();
-          //  this.ApplyTheme("ShinyBlue");
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-           
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen; //Start application at center of screen
             Switcher.pageSwitcher = this;
             Switcher.Switch(new Login());
-            
         }
 
+        //Navigate from UserControl to another
         public void Navigate(UserControl nextPage)
-        {   
+        {
             this.Content = nextPage;
-            if (nextPage is Buildings_report)
+            if (nextPage is Buildings_report) //If report, enlrage screen
             {
                 this.Width = 1200;
                 CenterWindowOnScreen();
@@ -50,6 +47,7 @@ namespace Management_System
             }
         }
 
+        //Navigate and change state if something is not normal
         public void Navigate(UserControl nextPage, object state)
         {
             this.Content = nextPage;
@@ -64,7 +62,7 @@ namespace Management_System
                 this.Height = 600;
                 CenterWindowOnScreen();
             }
-                ISwitchable s = nextPage as ISwitchable;
+            ISwitchable s = nextPage as ISwitchable;
 
             if (s != null)
                 s.UtilizeState(state);
@@ -73,6 +71,7 @@ namespace Management_System
                   + nextPage.Name.ToString());
         }
 
+        //Center to screen
         private void CenterWindowOnScreen()
         {
             double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;

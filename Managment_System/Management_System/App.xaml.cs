@@ -8,6 +8,9 @@ using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Threading;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
 namespace Management_System
 {
     /// <summary>
@@ -17,11 +20,22 @@ namespace Management_System
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            //Gets the application process and checks if it it already opened
+            string RunningProcess = Process.GetCurrentProcess().ProcessName;
+            Process[] processes = Process.GetProcessesByName(RunningProcess);
+            if (processes.Length > 1)
+            {
+                MessageBox.Show("המערכת ניהול כבר מופעלת, אין באפשרותך לפתוח אותה שוב");
+                Application.Current.Shutdown();
+            }
             base.OnStartup(e);
             EventManager.RegisterClassHandler(typeof(DatePicker),
                 DatePicker.LoadedEvent,
                 new RoutedEventHandler(DatePicker_Loaded));
         }
+
+
+
 
         public static T GetChildOfType<T>(DependencyObject depObj) where T : DependencyObject
         {
@@ -37,7 +51,7 @@ namespace Management_System
             return null;
         }
 
-
+        //DatePicker text overloading for every DatePicker in the Application
         void DatePicker_Loaded(object sender, RoutedEventArgs e)
         {
             var dp = sender as DatePicker;

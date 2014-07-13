@@ -29,7 +29,6 @@
         <TextBlock x:Name="service_type_block" HorizontalAlignment="Left" Margin="405,406,0,0" TextWrapping="Wrap" Text=":סוג שירות" VerticalAlignment="Top"/>
         <TextBox x:Name="address_box" HorizontalAlignment="Left" Height="23" Margin="239,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBlock x:Name="address_block" HorizontalAlignment="Left" Margin="415,54,0,0" TextWrapping="Wrap" Text=": כתובת" VerticalAlignment="Top"/>
-
     </Grid>
     <Window.Background>
         <ImageBrush ImageSource="/lightSilver.jpg" />
