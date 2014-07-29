@@ -26,6 +26,7 @@ namespace Management_System
         List<Report> items;
         List<string> temp;
         SqlDB db;
+        exit_query exit;
 
         //Represent a Report
         private class Report
@@ -92,7 +93,7 @@ namespace Management_System
         //Cancel button
         private void quit_button_Click(object sender, RoutedEventArgs e)
         {
-            Window exit = new exit_query();
+            exit = new exit_query();
             exit.Show();
         }
 

@@ -24,6 +24,7 @@ namespace Management_System
         List<string> items, data;
         List<Building> items1;
         Building building;
+        exit_query exit;
 
         public Buildings() //Constructor of Buildings
         {
@@ -133,25 +134,34 @@ namespace Management_System
 
             if (buildingslvDataBinding.SelectedItem != null)
             {
-                string temp = buildingslvDataBinding.SelectedItem.ToString();
-                db.deleteBuilding(temp);
-                UpdateList();
-                building_Address.Text = "";
-                account_Number_field.Text = "";
-                number_of_floors_field.Text = "";
-                attendence_box.Text = "";
-                check_for_box.Text = "";
-                garden_name_box.Text = "";
-                gardner_phone_box.Text = "";
-                elevator_num_box.Text = "";
-                heating_type_box.Text = "";
-                service_type_box.Text = "";
-                evelvator_check.IsChecked = false;
-                garden_check.IsChecked = false;
-                heating_check.IsChecked = false;
-                miklat_check.IsChecked = false;
+                if (MessageBox.Show("? האם אתה בטוח שברצונך למחוק", "אזהרה", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    //do no stuff
+                }
+                else
+                {
+                    //do yes stuff
+
+                    string temp = buildingslvDataBinding.SelectedItem.ToString();
+                    db.deleteBuilding(temp);
+                    UpdateList();
+                    building_Address.Text = "";
+                    account_Number_field.Text = "";
+                    number_of_floors_field.Text = "";
+                    attendence_box.Text = "";
+                    check_for_box.Text = "";
+                    garden_name_box.Text = "";
+                    gardner_phone_box.Text = "";
+                    elevator_num_box.Text = "";
+                    heating_type_box.Text = "";
+                    service_type_box.Text = "";
+                    evelvator_check.IsChecked = false;
+                    garden_check.IsChecked = false;
+                    heating_check.IsChecked = false;
+                    miklat_check.IsChecked = false;
 
 
+                }
             }
             else
             {
@@ -163,7 +173,7 @@ namespace Management_System
         //"Exit Application" button
         private void exit_button_Click(object sender, RoutedEventArgs e)
         {
-            Window exit = new exit_query();
+            exit = new exit_query();
             exit.Show();
         }
 
@@ -234,7 +244,10 @@ namespace Management_System
                 p.Padding = new Thickness(48);
                 doc.Blocks.Add(p);
 
-                p = new Paragraph(new Run(account_Number_field.Text + " " + account_Number.Text + "\n"));
+                if (!account_Number_field.Text.Trim().Equals(""))
+                    p = new Paragraph(new Run(account_Number_field.Text + " " + account_Number.Text + "\n"));        
+                else
+                    p = new Paragraph(new Run( "מספר חשבון בנק: אין"+ "\n"));        
                 styleParagraph(p, doc);
 
                 p.Inlines.Add(new Run(number_of_floors_field.Text + " " + floors_text.Text + "\n"));
@@ -250,8 +263,17 @@ namespace Management_System
                     p.Inlines.Add(new Run("לפקודת: אין" + "\n"));
                 
                 styleParagraph(p, doc);
+                if(garden_name_box.Text.Trim().Equals(""))
+                    p.Inlines.Add(new Run("שם גנן: אין" +"\n"));
+                else
                 p.Inlines.Add(new Run("שם גנן:" + " " + garden_name_box.Text + "\n"));
+                
+                    
+
                 styleParagraph(p, doc);
+                if (gardner_phone_box.Text.Trim().Equals(""))
+                    p.Inlines.Add(new Run("מספר טלפון: אין" + "\n"));
+                else
                 p.Inlines.Add(new Run("מספר טלפון:" + " " + gardner_phone_box.Text + "\n"));
                 styleParagraph(p, doc);
 
@@ -285,8 +307,14 @@ namespace Management_System
                     p.Inlines.Add(new Run("מקלט: אין" + "\n"));
 
                 styleParagraph(p, doc);
+                if(heating_type_box.Text.Trim().Equals(""))
+                    p.Inlines.Add(new Run("סוג חימום: אין" + "\n"));
+                else
                 p.Inlines.Add(new Run("סוג חימום: " + heating_type_box.Text + "\n"));
                 styleParagraph(p, doc);
+                if(service_type_box.Text.Trim().Equals(""))
+                    p.Inlines.Add(new Run("סוג שירות: אין" + "\n"));
+                else
                 p.Inlines.Add(new Run("סוג שירות: " + service_type_box.Text + "\n"));
                 styleParagraph(p, doc);
                 IDocumentPaginatorSource dps = doc;

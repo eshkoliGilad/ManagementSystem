@@ -10,7 +10,6 @@ C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\Management_System.csproj.ResolveComReference.cache
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\Buildings.baml
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\Buildings_report.baml
-C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\Dictionary1.baml
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\exit_query.baml
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\MainMenu.baml
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\Malfunctions.baml
@@ -28,7 +27,6 @@ C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\Themes\ShinyBlue.baml
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\Themes\ShinyRed.baml
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\Themes\WhistlerBlue.baml
-C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\App.baml
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\Buildings.g.cs
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\Buildings_report.g.cs
 C:\Users\Gilad\documents\visual studio 2012\Projects\Managment_System\Management_System\obj\Debug\exit_query.g.cs

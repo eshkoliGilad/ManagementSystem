@@ -22,13 +22,15 @@ namespace Management_System
     public partial class Login : UserControl
     {
         SqlDB db;
-
+        loading load;
+        Ticker ticker;
+        PageSwitcher pageswitcher;
         //This class represent Login window
         public Login()
         {
+            
             db = new SqlDB();
             InitializeComponent();
-
             BitmapImage pic = new BitmapImage();
             pic.BeginInit();
             pic.UriSource = new Uri(@"/Management_System;component/Resources/companyLogo.png", UriKind.Relative);
@@ -52,22 +54,30 @@ namespace Management_System
         //Login button logic
         private void login_button(object sender, RoutedEventArgs e) //Check if username and password is valid
         {
-            var loading = new loading();
-            loading.Show();
+            load = new loading();
+            load.Show();
             string user = textBok_user.Text.ToString().Trim();
             string password = textBox_password.Password;
             Dispatcher.Invoke(new Action(() => { }), DispatcherPriority.ContextIdle, null);
             bool isValid = db.check_username(user, password);
-            loading.Close();
+            load.Close();
             if (isValid == false)
+            {
+                tmp.Text = "NOK";
                 MessageBox.Show("שם משתמש או סיסמא לא נכונים. נסה שוב");
+            }
             else
             {
                 if (SqlDB.isOnline)
+                {
+                    tmp.Text = "OK";
                     MessageBox.Show("המערכת מחוברת לרשת בהצלחה");
+                }
                 else
+                {
+                    tmp.Text = "OKL";
                     MessageBox.Show("המערכת אינה מחוברת לאינטרנט, שים לב כי ניתן להשתמש בתוכנה אך לא ניתן לשמור שינויים");
-
+                }
                 Switcher.Switch(this, new MainMenu());
             }
         }

@@ -24,6 +24,8 @@ namespace Management_System
     {
         List<Tenant> items;
         SqlDB db;
+        exit_query exit;
+
         public Tenants()
         {
             InitializeComponent();
@@ -107,10 +109,17 @@ namespace Management_System
         {
             if (tenantslvDataBinding.SelectedItem != null)
             {
-                string name = tenantslvDataBinding.SelectedItem.ToString();
-                db.deleteTenant(name);
-                UpdateList();
-                MessageBox.Show("דייר נמחק בהצלחה");
+                if (MessageBox.Show("? האם אתה בטוח שברצונך למחוק", "אזהרה", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    //do nothing
+                }
+                else
+                {
+                    string name = tenantslvDataBinding.SelectedItem.ToString();
+                    db.deleteTenant(name);
+                    UpdateList();
+                    MessageBox.Show("דייר נמחק בהצלחה");
+                }
             }
             else
             {
@@ -120,7 +129,7 @@ namespace Management_System
 
         private void back_button_tenants_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(this,new MainMenu());
+            Switcher.Switch(this, new MainMenu());
         }
 
         private void open_tenant_Click(object sender, RoutedEventArgs e)
@@ -134,13 +143,13 @@ namespace Management_System
             }
             else
                 MessageBox.Show("בחר דייר");
-             
-            
+
+
         }
 
         private void exit_button_Click(object sender, RoutedEventArgs e)
         {
-            Window exit = new exit_query();
+            exit = new exit_query();
             exit.Show();
         }
 

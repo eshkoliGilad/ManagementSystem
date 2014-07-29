@@ -5,7 +5,7 @@
     <Grid>
         <Button x:Name="close_button" Content="סגור" HorizontalAlignment="Left" Margin="159,303,0,0" VerticalAlignment="Top" Width="75" Click="close_button_Click"/>
         <TextBlock x:Name="description_malfunction_block" HorizontalAlignment="Left" Margin="140,29,0,0" TextWrapping="Wrap" Text=": תיאור תקלה" VerticalAlignment="Top" FontSize="20px"/>
-        <TextBox x:Name="description_mal_box" HorizontalAlignment="Left" Height="190" Margin="72,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250"/>
+        <TextBox x:Name="description_mal_box" FlowDirection="RightToLeft" HorizontalAlignment="Left" Height="190" Margin="72,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250"/>
 
     </Grid>
     <Window.Background>

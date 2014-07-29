@@ -1,7 +1,8 @@
 ﻿<Window x:Class="Management_System.meetings"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="meetings" Height="480.597" Width="458.209">
+        Title="אסיפות דיירים" Height="481" Width="458"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <ListView HorizontalAlignment="Left" Height="150" Name="TenatsMeetings"  MouseDoubleClick="ListView_MouseDoubleClick" HorizontalContentAlignment="Right" Margin="28,72,0,0" VerticalAlignment="Top" Width="397">
             <ListView.ItemContainerStyle>

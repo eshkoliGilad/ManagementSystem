@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1200">
+             d:DesignHeight="600" d:DesignWidth="1200"
+             
+             >
     <Grid Margin="10,9,10,11">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="721*"/>
@@ -13,31 +15,203 @@
         <StackPanel Grid.ColumnSpan="2" Margin="7,7,3,-7">
             <DataGrid Name="dgUsers" SelectionUnit="Cell" SelectionMode="Single" AutoGenerateColumns="False" Margin="0,52,0,109" Grid.ColumnSpan="2" ItemsSource="{Binding listOfTenants}" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="דצמבר" Binding="{Binding December,Mode=TwoWay}" Width="*" />
-                    <DataGridTextColumn Header="נובמבר" Binding="{Binding November,Mode=TwoWay}" Width="*" />
-                    <DataGridTextColumn Header="אוקטובר" Binding="{Binding October,Mode=TwoWay}" Width="*"/>
-                    <DataGridTextColumn Header="ספטמבר" Binding="{Binding September,Mode=TwoWay}" Width="*"/>
-                    <DataGridTextColumn Header="אוגוסט" Binding="{Binding August,Mode=TwoWay}" Width="*"/>
-                    <DataGridTextColumn Header="יולי" Binding="{Binding July,Mode=TwoWay}" Width="*"/>
-                    <DataGridTextColumn Header="יוני" Binding="{Binding June,Mode=TwoWay}" Width="*"/>
-                    <DataGridTextColumn Header="מאי" Binding="{Binding May,Mode=TwoWay}" Width="*"/>
-                    <DataGridTextColumn Header="אפריל" Binding="{Binding April,Mode=TwoWay}" Width="*"/>
-                    <DataGridTextColumn Header="מרץ" Binding="{Binding March,Mode=TwoWay}" Width="*"/>
-                    <DataGridTextColumn Header="פברואר" Binding="{Binding February,Mode=TwoWay}" Width="*"/>
-                    <DataGridTextColumn Header="ינואר" Binding="{Binding January,Mode=TwoWay}" Width="*"/>
-                    <DataGridTextColumn Header="שם דייר" Binding="{Binding Name}" Width="200"/>
-                    <DataGridTextColumn Header="מס' דירה" Binding="{Binding apartmentNumber}" Width="60"/>
+                    <DataGridTextColumn Header="דצמבר" Binding="{Binding December,Mode=TwoWay}" Width="*" >
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                     Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="נובמבר" Binding="{Binding November,Mode=TwoWay}" Width="*" >
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                     Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>  
+                    <DataGridTextColumn Header="אוקטובר" Binding="{Binding October,Mode=TwoWay}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                     Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="ספטמבר" Binding="{Binding September,Mode=TwoWay}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                     Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="אוגוסט" Binding="{Binding August,Mode=TwoWay}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                     Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="יולי" Binding="{Binding July,Mode=TwoWay}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                     Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="יוני" Binding="{Binding June,Mode=TwoWay}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                     Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="מאי" Binding="{Binding May,Mode=TwoWay}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                     Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="אפריל" Binding="{Binding April,Mode=TwoWay}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                     Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="מרץ" Binding="{Binding March,Mode=TwoWay}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                     Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="פברואר" Binding="{Binding February,Mode=TwoWay}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                     Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="ינואר" Binding="{Binding January,Mode=TwoWay}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                     Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="שם דייר" Binding="{Binding Name}" Width="200">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                     Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="מס' דירה" Binding="{Binding apartmentNumber}" Width="60" >
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment"
+                     Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
-        <Button x:Name="back_button" Content="חזרה" HorizontalAlignment="Left" Margin="111,487,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1" Grid.Column="1"/>
+      
+        <Button x:Name="back_button" Content="חזרה" HorizontalAlignment="Left" Margin="125,487,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1" Grid.Column="1"/>
         <TextBlock x:Name="address_Reports_show" HorizontalAlignment="Left" TextAlignment="Center" Margin="323,11,0,0" FontSize="24px" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="530">
             <TextBlock.Effect>
                 <DropShadowEffect Color="#FF3E3E3E" Direction="201" Opacity="0.68" ShadowDepth="3" BlurRadius="6"/>
             </TextBlock.Effect></TextBlock>
-        <Button x:Name="save_button" Content="שמירה" Margin="573,487,73,0" VerticalAlignment="Top" Click="save_button_Click"/>
+        <Button x:Name="save_button" Content="שמירה" Margin="659,487,446,0" VerticalAlignment="Top" Click="save_button_Click" Grid.ColumnSpan="2"/>
         <Image x:Name="stateOfDB" HorizontalAlignment="Left" Height="30" Width="30" Margin="7,7,0,0" Grid.RowSpan="2" VerticalAlignment="Top" />
-        <Button x:Name="print_report" Content="הדפס" HorizontalAlignment="Left" Margin="337,487,0,0" VerticalAlignment="Top" Width="75" Click="print_report_Click"/>
+        <Button x:Name="print_report" Content="הדפס" HorizontalAlignment="Left" Margin="273,487,0,0" VerticalAlignment="Top" Width="75" Click="print_report_Click"/>
+        <Button x:Name="refresh_button" Content="רענן" HorizontalAlignment="Left" Margin="466,487,0,0" VerticalAlignment="Top" Width="75" Click="refresh_button_Click"/>
+       
     </Grid>
 
 </UserControl>

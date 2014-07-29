@@ -19,6 +19,7 @@ namespace Management_System
     /// </summary>
     public partial class description : Window
     {
+        
         //This class represent malfunction description
         public description(Malfunctions.Malfunction a)
         {

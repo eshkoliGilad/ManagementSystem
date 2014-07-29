@@ -18,22 +18,38 @@ namespace Management_System
     /// </summary>
     public partial class App : Application
     {
+        private static Process instance;
+
+        public static bool Instance
+        {
+            get
+            {                
+                instance = Process.GetCurrentProcess();
+                string RunningProcess = instance.ProcessName;
+                Process[] processes = Process.GetProcessesByName(RunningProcess);
+                if(processes.Length>1)
+                      return false;
+                else
+                    return true;
+            }
+        }
+
+        //First function to be called in Application
         protected override void OnStartup(StartupEventArgs e)
         {
-            //Gets the application process and checks if it it already opened
-            string RunningProcess = Process.GetCurrentProcess().ProcessName;
-            Process[] processes = Process.GetProcessesByName(RunningProcess);
-            if (processes.Length > 1)
+            if (App.Instance != true)
             {
                 MessageBox.Show("המערכת ניהול כבר מופעלת, אין באפשרותך לפתוח אותה שוב");
                 Application.Current.Shutdown();
             }
-            base.OnStartup(e);
-            EventManager.RegisterClassHandler(typeof(DatePicker),
-                DatePicker.LoadedEvent,
-                new RoutedEventHandler(DatePicker_Loaded));
+            else
+            {
+                base.OnStartup(e);
+                EventManager.RegisterClassHandler(typeof(DatePicker),
+                    DatePicker.LoadedEvent,
+                    new RoutedEventHandler(DatePicker_Loaded));
+            }
         }
-
 
 
 

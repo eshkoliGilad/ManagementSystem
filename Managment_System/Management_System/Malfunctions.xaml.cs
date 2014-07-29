@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,7 @@ namespace Management_System
         List<Malfunction> items1;
         List<Malfunction_Closed> items2;
         SqlDB db;
+        exit_query exit;
 
         public Malfunctions()
         {
@@ -68,6 +70,8 @@ namespace Management_System
             items = db.updateListOfOpenMals();
             openMalslvDataBinding.ItemsSource = items;
             openMalslvDataBinding.Items.Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(openMalslvDataBinding.ItemsSource);
+            view.SortDescriptions.Add(new SortDescription("building", ListSortDirection.Ascending)); //Sort by name of tenant
         }
 
         //Show list of closed malfunctions
@@ -79,6 +83,8 @@ namespace Management_System
             items1 = db.updateListOfClosedMals();
             closedMalslvDataBinding.ItemsSource = items1;
             closedMalslvDataBinding.Items.Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(closedMalslvDataBinding.ItemsSource);
+            view.SortDescriptions.Add(new SortDescription("building", ListSortDirection.Ascending)); //Sort by name of tenant
             items1.ForEach(Copy); //For printing closed malfunctions
         }
 
@@ -163,11 +169,21 @@ namespace Management_System
         {
             if (closedMalslvDataBinding.SelectedItem != null)
             {
-                int temp = ((Malfunction)(closedMalslvDataBinding.SelectedItem)).id;
-                db.deleteMalfunction(temp);
-                UpdateListOfClosedMals();
-                MessageBox.Show(".תקלה סגורה נמחקה בהצלחה");
+                if (MessageBox.Show("? האם אתה בטוח שברצונך למחוק", "אזהרה", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    //do nothing
+                }
+                else
+                {
+                    int temp = ((Malfunction)(closedMalslvDataBinding.SelectedItem)).id;
+                    db.deleteMalfunction(temp);
+                    UpdateListOfClosedMals();
+                    MessageBox.Show(".תקלה סגורה נמחקה בהצלחה");
+                }
+                
             }
+            else
+                MessageBox.Show("לא נבחרה תקלה");
         }
 
         //Open description for open Malfunction
@@ -220,15 +236,23 @@ namespace Management_System
         //Delete All malfunction button logic
         private void delete_all_button_Click(object sender, RoutedEventArgs e)
         {
-            db.deleteAllMals();
-            UpdateListOfClosedMals();
-            MessageBox.Show(".כל התקלות הסגורות נמחקו בהצלחה");
+            if (MessageBox.Show("? האם אתה בטוח שברצונך למחוק", "אזהרה", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            {
+                //do nothing
+            }
+            else
+            {
+                db.deleteAllMals();
+                UpdateListOfClosedMals();
+                MessageBox.Show(".כל התקלות הסגורות נמחקו בהצלחה");
+            }
+            
         }
 
         //Exit button
         private void exit_button_Click(object sender, RoutedEventArgs e)
         {
-            Window exit = new exit_query();
+            exit = new exit_query();
             exit.Show();
         }
 

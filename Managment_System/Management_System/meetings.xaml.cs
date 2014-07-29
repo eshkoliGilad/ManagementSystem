@@ -56,7 +56,7 @@ namespace Management_System
             TenatsMeetings.ItemsSource = items1;
             TenatsMeetings.Items.Refresh();
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(TenatsMeetings.ItemsSource);
-            //view.SortDescriptions.Add(new SortDescription("date", ListSortDirection.Ascending)); //Sort by date, won't work well
+            view.SortDescriptions.Add(new SortDescription("date", ListSortDirection.Ascending)); //Sort by date
         }
 
         //Cancel button
@@ -74,6 +74,9 @@ namespace Management_System
             list[2] = dateString.ToString().Trim();
             db.addMeeting(list);
             showMeetingsList(list[0]);
+            notes_meetings_box.Text = "";
+            dateString = DateTime.Today.ToString();
+            datepicker_meetings.SelectedDate = DateTime.Parse(dateString);
             MessageBox.Show("אסיפה נשמרה בהצלחה");
         }
 
@@ -107,11 +110,22 @@ namespace Management_System
             var item = TenatsMeetings.SelectedItem as meetings.Meeting;
             if (item != null)
             {
-                string a = item.notes.ToString().Trim();
-                string b = item.date.ToString().Trim();
-                db.deleteMeeting(a, b);
-                showMeetingsList(building);
-                MessageBox.Show("אסיפה נמחקה בהצלחה");
+                if (MessageBox.Show("? האם אתה בטוח שברצונך למחוק", "אזהרה", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    //do nothing
+                }
+                else
+                {
+                    string a = item.notes.ToString().Trim();
+                    string b = item.date.ToString().Trim();
+                    db.deleteMeeting(a, b);
+                    showMeetingsList(building);
+                    notes_meetings_box.Text = "";
+                     dateString = DateTime.Today.ToString();
+                    datepicker_meetings.SelectedDate = DateTime.Parse(dateString);
+                    MessageBox.Show("אסיפה נמחקה בהצלחה");
+                }
+                
             }
             else
                 MessageBox.Show("לא נבחרה אסיפה");

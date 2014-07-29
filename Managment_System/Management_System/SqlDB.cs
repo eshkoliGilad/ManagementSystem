@@ -12,19 +12,55 @@ namespace Management_System
 
     //Represent DBA class for the application
     public class SqlDB
-    {        
+    {
         List<string> items;
         List<Malfunctions.Malfunction> itemsMals;
         List<meetings.Meeting> items1;
         SqlConnection conLocal;
         MySqlConnection con;
         public static bool isOnline = false;
-        
+
         //SQL constructor - configuration
         public SqlDB()
         {
             con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
+        }
+
+
+        public void deleteAllMettings(string building)
+        {
+               string sqlIns = "DELETE FROM meetings WHERE building=@building";
+               if (isOnline)
+               {
+                   try
+                   {
+                       con.Open();
+                       MySqlCommand cmdIns = new MySqlCommand(sqlIns, con);
+                       cmdIns.Parameters.AddWithValue("@building", building);
+                       cmdIns.ExecuteNonQuery();
+                   }
+                   catch (Exception ex) { throw new Exception("Online Database connection error", ex); }
+                   finally
+                   {
+                       con.Close();
+                   }
+               }
+               else
+               {
+                   try
+                   {
+                       conLocal.Open();
+                       SqlCommand cmdIns = new SqlCommand(sqlIns, conLocal);
+                       cmdIns.Parameters.AddWithValue("@building", building);
+                       cmdIns.ExecuteNonQuery();
+                   }
+                   catch (Exception ex) { throw new Exception("Local Database connection error", ex); }
+                   finally
+                   {
+                       conLocal.Close();
+                   }
+               }
         }
 
         //Delete Meeting function
@@ -65,7 +101,6 @@ namespace Management_System
             }
         }
 
-
         //Saving Malfunction function
         public void save_Malfunction(string[] list)
         {
@@ -73,16 +108,16 @@ namespace Management_System
             {
                 con.Open();
                 int rows = 0;
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM malfunctions ", con); //for reading
-                MySqlDataReader reader = cmd.ExecuteReader(); //for writing
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM malfunctions ", con);
+                MySqlDataReader reader = cmd.ExecuteReader();
 
-                while (reader.Read()) //for writing
+                while (reader.Read())
                 {
                     if (rows < Convert.ToInt32(reader[4].ToString()))
-                          rows = Convert.ToInt32(reader[4].ToString());
+                        rows = Convert.ToInt32(reader[4].ToString());
                 }
                 rows++;
-                string state;//, type, building, desc,date;
+                string state;
                 state = "opend";
                 con.Close();
                 con.Open();
@@ -108,16 +143,16 @@ namespace Management_System
             {
                 conLocal.Open();
                 int rows = 0;
-                SqlCommand cmd = new SqlCommand("SELECT * FROM malfunctions ", conLocal); //for reading
-                SqlDataReader reader = cmd.ExecuteReader(); //for writing
+                SqlCommand cmd = new SqlCommand("SELECT * FROM malfunctions ", conLocal);
+                SqlDataReader reader = cmd.ExecuteReader();
 
-                while (reader.Read()) //for writing
+                while (reader.Read())
                 {
                     if (rows < Convert.ToInt32(reader[4].ToString()))
                         rows = Convert.ToInt32(reader[4].ToString());
                 }
                 rows++;
-                string state;//, type, building, desc,date;
+                string state;
                 state = "opend";
                 conLocal.Close();
                 conLocal.Open();
@@ -139,8 +174,9 @@ namespace Management_System
                     conLocal.Close();
                 }
             }
-}
+        }
 
+        //Loading building option for combobox
         public List<string> combobox_building_load()
         {
             List<string> data = new List<string>();
@@ -148,10 +184,10 @@ namespace Management_System
             if (isOnline)
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM buildings ", con); //for reading
-                MySqlDataReader reader = cmd.ExecuteReader(); //for writing
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM buildings ", con);
+                MySqlDataReader reader = cmd.ExecuteReader();
 
-                while (reader.Read()) //for writing
+                while (reader.Read())
                 {
                     data.Add(reader[0].ToString().Trim());
                 }
@@ -160,18 +196,19 @@ namespace Management_System
             else
             {
                 conLocal.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM buildings ", conLocal); //for reading
-                SqlDataReader reader = cmd.ExecuteReader(); //for writing
+                SqlCommand cmd = new SqlCommand("SELECT * FROM buildings ", conLocal);
+                SqlDataReader reader = cmd.ExecuteReader();
 
-                while (reader.Read()) //for writing
+                while (reader.Read())
                 {
                     data.Add(reader[0].ToString().Trim());
                 }
                 conLocal.Close();
             }
-                return data;
+            return data;
         }
 
+        //Delete All Closed Malfunctions
         public void deleteAllMals()
         {
             string sqlIns = "DELETE FROM malfunctions WHERE state=@state";
@@ -208,12 +245,11 @@ namespace Management_System
         }
 
 
-
+        //Delete specific closed Malfunction
         public void deleteMalfunction(int num)
         {
-            
-            int temp = num; 
-            
+            int temp = num;
+
             string sqlIns = "DELETE FROM malfunctions WHERE id=@id";
             if (isOnline)
             {
@@ -247,10 +283,9 @@ namespace Management_System
             }
         }
 
-
+        //Close specific open Malfunction
         public void closeMals(int num)
         {
-
             int temp = num;
 
             string sqlIns = "UPDATE malfunctions SET state=@new_state WHERE id=@id";
@@ -290,6 +325,7 @@ namespace Management_System
             }
         }
 
+        //Refreshing List of Closed Malfunction in ListView
         public List<Malfunctions.Malfunction> updateListOfClosedMals()
         {
             itemsMals = new List<Malfunctions.Malfunction>();
@@ -341,7 +377,7 @@ namespace Management_System
         }
 
 
-
+        //Refreshing List of Opened Malfunction in ListView
         public List<Malfunctions.Malfunction> updateListOfOpenMals()
         {
             itemsMals = new List<Malfunctions.Malfunction>();
@@ -350,8 +386,8 @@ namespace Management_System
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM malfunctions WHERE state ='opend' ", con); //for reading
-                MySqlDataReader reader = cmd.ExecuteReader(); //for writing
-                while (reader.Read()) //for writing
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
                     building_mal = reader[1].ToString().Trim();
                     type = reader[2].ToString().Trim();
@@ -371,8 +407,8 @@ namespace Management_System
             {
                 conLocal.Open();
                 SqlCommand cmd = new SqlCommand("SELECT * FROM malfunctions WHERE state ='opend' ", conLocal); //for reading
-                SqlDataReader reader = cmd.ExecuteReader(); //for writing
-                while (reader.Read()) //for writing
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
                     building_mal = reader[1].ToString().Trim();
                     type = reader[2].ToString().Trim();
@@ -391,10 +427,10 @@ namespace Management_System
             return itemsMals;
         }
 
-
+        //Copy Online Malfunctions table to Local Database
         public void copyDataBasesOfMalfunctions()
         {
-            string s = "", s1 = "", s2 = "", s3="",s4="",s5="";
+            string s = "", s1 = "", s2 = "", s3 = "", s4 = "", s5 = "";
             con.Open();
             conLocal.Open();
             string deleteSQL = "DELETE FROM malfunctions";
@@ -433,6 +469,7 @@ namespace Management_System
             conLocal.Close();
         }
 
+        //Copy Online Meetings table to Local Database
 
         public void copyDataBasesOfMeeting()
         {
@@ -450,7 +487,7 @@ namespace Management_System
                 s = reader[0].ToString().Trim();
                 s1 = reader[1].ToString().Trim();
                 s2 = reader[2].ToString().Trim();
-              
+
                 //   con.Close();
                 string sqlIns = "INSERT INTO meetings (date,explanation, building) VALUES (@date, @note, @building)";
 
@@ -472,7 +509,7 @@ namespace Management_System
             conLocal.Close();
         }
 
-
+        //Copy Online Tenants table to Local Database
         public void copyDataBasesOfTenants()
         {
             string s = "", s1 = "", s2 = "", s3 = "", s4 = "", s5 = "", s6 = "", s7 = "", s8 = "", s9 = "", s10 = "", s11 = "", s12 = "", s13 = "", s14 = "", s15 = "", s16 = "", s17 = "", s18 = "", s19 = "";
@@ -544,7 +581,7 @@ namespace Management_System
             conLocal.Close();
         }
 
-
+        //Copy Online Malfunctions types table to Local Database
         public void copyDataBasesOfMalsTypes()
         {
             string s = "";
@@ -577,6 +614,7 @@ namespace Management_System
             conLocal.Close();
         }
 
+        //Copy Online appartments states table to Local Database
         public void copyDataBasesOfTypes()
         {
             string s = "";
@@ -609,69 +647,70 @@ namespace Management_System
             conLocal.Close();
         }
 
-
+        //Copy Online Buildings table to Local Database
         public void copyDataBasesOfBuildings()
         {
-            string s="", s1="", s2="", s3="", s4="", s5="", s6="", s7="", s8="", s9="", s10="", s11="", s12="", s13="";
+            string s = "", s1 = "", s2 = "", s3 = "", s4 = "", s5 = "", s6 = "", s7 = "", s8 = "", s9 = "", s10 = "", s11 = "", s12 = "", s13 = "";
             con.Open();
             conLocal.Open();
             string deleteSQL = "DELETE FROM buildings";
             SqlCommand cmd2 = new SqlCommand(deleteSQL, conLocal);
             cmd2.ExecuteNonQuery();
-            
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM buildings ", con);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM buildings ", con);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                s = reader[0].ToString().Trim();
+                s1 = reader[1].ToString().Trim();
+                s2 = reader[2].ToString().Trim();
+                s3 = reader[3].ToString().Trim();
+                s4 = reader[4].ToString().Trim();
+                s5 = reader[5].ToString().Trim();
+                s6 = reader[6].ToString().Trim();
+                s7 = reader[7].ToString().Trim();
+                s8 = reader[8].ToString().Trim();
+                s9 = reader[9].ToString().Trim();
+                s10 = reader[10].ToString().Trim();
+                s11 = reader[11].ToString().Trim();
+                s12 = reader[12].ToString().Trim();
+                s13 = reader[13].ToString().Trim();
+
+                //   con.Close();
+                string sqlIns = "INSERT INTO buildings (Address,Account,floors,tenants,for_whom,gardner,gardner_phone,elevator_num,heating_type,service_type,IsElevator,IsGarden,IsHeating,IsBasement) VALUES (@Address,@Account,@floors,@tenants,@for_whom,@gardner,@gardner_phone,@elevator_num,@heating_type,@service_type,@IsElevator,@IsGarden,@IsHeating,@IsBasement)";
+
+                try
                 {
-                    s = reader[0].ToString().Trim();
-                    s1 = reader[1].ToString().Trim();
-                    s2 = reader[2].ToString().Trim();
-                    s3 = reader[3].ToString().Trim();
-                    s4 = reader[4].ToString().Trim();
-                    s5 = reader[5].ToString().Trim();
-                    s6 = reader[6].ToString().Trim();
-                    s7 = reader[7].ToString().Trim();
-                    s8 = reader[8].ToString().Trim();
-                    s9 = reader[9].ToString().Trim();
-                    s10 = reader[10].ToString().Trim();
-                    s11 = reader[11].ToString().Trim();
-                    s12 = reader[12].ToString().Trim();
-                    s13 = reader[13].ToString().Trim();
-
-                    //   con.Close();
-                    string sqlIns = "INSERT INTO buildings (Address,Account,floors,tenants,for_whom,gardner,gardner_phone,elevator_num,heating_type,service_type,IsElevator,IsGarden,IsHeating,IsBasement) VALUES (@Address,@Account,@floors,@tenants,@for_whom,@gardner,@gardner_phone,@elevator_num,@heating_type,@service_type,@IsElevator,@IsGarden,@IsHeating,@IsBasement)";
-
-                    try
-                    {
-                        SqlCommand cmdIns = new SqlCommand(sqlIns, conLocal);
-                        cmdIns.Parameters.AddWithValue("@Address", s);
-                        cmdIns.Parameters.AddWithValue("@Account", s1);
-                        cmdIns.Parameters.AddWithValue("@floors", s2);
-                        cmdIns.Parameters.AddWithValue("@tenants", s3);
-                        cmdIns.Parameters.AddWithValue("@for_whom", s4);
-                        cmdIns.Parameters.AddWithValue("@gardner", s5);
-                        cmdIns.Parameters.AddWithValue("@gardner_phone", s6);
-                        cmdIns.Parameters.AddWithValue("@elevator_num", s7);
-                        cmdIns.Parameters.AddWithValue("@heating_type", s8);
-                        cmdIns.Parameters.AddWithValue("@service_type", s9);
-                        cmdIns.Parameters.AddWithValue("@IsElevator", s10);
-                        cmdIns.Parameters.AddWithValue("@IsGarden", s11);
-                        cmdIns.Parameters.AddWithValue("@IsHeating", s12);
-                        cmdIns.Parameters.AddWithValue("@IsBasement", s13);
-                        cmdIns.ExecuteNonQuery();
-                    }
-                    catch (Exception ex) { throw new Exception("Database connection error", ex); }
-                    finally
-                    {
-                        
-                    }
+                    SqlCommand cmdIns = new SqlCommand(sqlIns, conLocal);
+                    cmdIns.Parameters.AddWithValue("@Address", s);
+                    cmdIns.Parameters.AddWithValue("@Account", s1);
+                    cmdIns.Parameters.AddWithValue("@floors", s2);
+                    cmdIns.Parameters.AddWithValue("@tenants", s3);
+                    cmdIns.Parameters.AddWithValue("@for_whom", s4);
+                    cmdIns.Parameters.AddWithValue("@gardner", s5);
+                    cmdIns.Parameters.AddWithValue("@gardner_phone", s6);
+                    cmdIns.Parameters.AddWithValue("@elevator_num", s7);
+                    cmdIns.Parameters.AddWithValue("@heating_type", s8);
+                    cmdIns.Parameters.AddWithValue("@service_type", s9);
+                    cmdIns.Parameters.AddWithValue("@IsElevator", s10);
+                    cmdIns.Parameters.AddWithValue("@IsGarden", s11);
+                    cmdIns.Parameters.AddWithValue("@IsHeating", s12);
+                    cmdIns.Parameters.AddWithValue("@IsBasement", s13);
+                    cmdIns.ExecuteNonQuery();
                 }
-                con.Close();
-                conLocal.Close();
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
+                finally
+                {
+
+                }
+            }
+            con.Close();
+            conLocal.Close();
         }
 
+        //Add new meeting function
         public void addMeeting(string[] listOfParameters)
-        {            
+        {
             string sqlIns = "INSERT INTO meetings (building,explanation,date) VALUES (@building,@explanation,@date)";
             if (isOnline)
             {
@@ -709,6 +748,8 @@ namespace Management_System
             }
         }
 
+
+        //Show meetings list in ListView
         public List<meetings.Meeting> showMeetingList(string address)
         {
             string param = address.Trim();
@@ -719,8 +760,8 @@ namespace Management_System
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM meetings WHERE building='" + param + "'", con); //for reading
-                MySqlDataReader reader = cmd.ExecuteReader(); //for writing
-                while (reader.Read()) //for writing
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
                     building = reader[2].ToString().Trim();
                     notes = reader[1].ToString().Trim();
@@ -737,8 +778,8 @@ namespace Management_System
             {
                 conLocal.Open();
                 SqlCommand cmd = new SqlCommand("SELECT * FROM meetings WHERE building='" + param + "'", conLocal); //for reading
-                SqlDataReader reader = cmd.ExecuteReader(); //for writing
-                while (reader.Read()) //for writing
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
                     building = reader[2].ToString().Trim();
                     notes = reader[1].ToString().Trim();
@@ -751,36 +792,34 @@ namespace Management_System
                 }
                 conLocal.Close();
             }
-                return items1;
+            return items1;
         }
-        
+
+        //Check valid username and password function, also check if system is online or offline, if online copy all online database info to local db
         public bool check_username(string user, string password)
         {
             bool isValid = false;
             try
             {
-             con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-              con.Open();
-               isOnline = true;
+                con = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+                con.Open();
+                isOnline = true;
             }
 
-             catch
-              {
-              isOnline = false;
-               conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
-               try
-               {
-                   conLocal.Open();
-              }
-              catch
-               {
-                    //SHOW MESSAGE IN OTHER CLASS OR SOMETHING LIKE THAT     
-               }
+            catch
+            {
+                isOnline = false;
+                conLocal = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringLocal"].ConnectionString);
+                try
+                {
+                    conLocal.Open();
+                }
+                catch (Exception ex) { throw new Exception("Online and Local connection cannot be completed", ex); }
             }
 
             if (isOnline)
             {
-                
+
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM users ", con);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -801,7 +840,6 @@ namespace Management_System
                 copyDataBasesOfMalfunctions();
                 copyDataBasesOfTypes();
                 copyDataBasesOfMalsTypes();
-                
             }
 
             else
@@ -823,39 +861,41 @@ namespace Management_System
             }
             return isValid;
         }
+
+        //Add new building to db function
         public void add_new_building(string[] listOfParameters)
         {
-            
+
             string sqlIns = "INSERT INTO buildings (Address,Account,floors,tenants,for_whom,gardner,gardner_phone,elevator_num,heating_type,service_type,IsElevator,IsGarden,IsHeating,IsBasement) VALUES (@Address,@Account,@floors,@tenants,@for_whom,@gardner,@gardner_phone,@elevator_num,@heating_type,@service_type,@IsElevator,@IsGarden,@IsHeating,@IsBasement)";
             if (isOnline)
             {
-            try
-            {
-                con.Open();
-                MySqlCommand cmdIns = new MySqlCommand(sqlIns, con);
-                
-                cmdIns.Parameters.AddWithValue("@Address", listOfParameters[0]);
-                cmdIns.Parameters.AddWithValue("@Account", listOfParameters[1]);
-                cmdIns.Parameters.AddWithValue("@floors", listOfParameters[2]);
-                cmdIns.Parameters.AddWithValue("@tenants", listOfParameters[3]);
-                cmdIns.Parameters.AddWithValue("@for_whom", listOfParameters[4]);
-                cmdIns.Parameters.AddWithValue("@gardner", listOfParameters[5]);
-                cmdIns.Parameters.AddWithValue("@gardner_phone", listOfParameters[6]);
-                cmdIns.Parameters.AddWithValue("@elevator_num", listOfParameters[7]);
-                cmdIns.Parameters.AddWithValue("@heating_type", listOfParameters[8]);
-                cmdIns.Parameters.AddWithValue("@service_type", listOfParameters[9]);
-                cmdIns.Parameters.AddWithValue("@IsElevator", listOfParameters[10]);
-                cmdIns.Parameters.AddWithValue("@IsGarden", listOfParameters[11]);
-                cmdIns.Parameters.AddWithValue("@IsHeating", listOfParameters[12]);
-                cmdIns.Parameters.AddWithValue("@IsBasement", listOfParameters[13]);
-                cmdIns.ExecuteNonQuery();
+                try
+                {
+                    con.Open();
+                    MySqlCommand cmdIns = new MySqlCommand(sqlIns, con);
+
+                    cmdIns.Parameters.AddWithValue("@Address", listOfParameters[0]);
+                    cmdIns.Parameters.AddWithValue("@Account", listOfParameters[1]);
+                    cmdIns.Parameters.AddWithValue("@floors", listOfParameters[2]);
+                    cmdIns.Parameters.AddWithValue("@tenants", listOfParameters[3]);
+                    cmdIns.Parameters.AddWithValue("@for_whom", listOfParameters[4]);
+                    cmdIns.Parameters.AddWithValue("@gardner", listOfParameters[5]);
+                    cmdIns.Parameters.AddWithValue("@gardner_phone", listOfParameters[6]);
+                    cmdIns.Parameters.AddWithValue("@elevator_num", listOfParameters[7]);
+                    cmdIns.Parameters.AddWithValue("@heating_type", listOfParameters[8]);
+                    cmdIns.Parameters.AddWithValue("@service_type", listOfParameters[9]);
+                    cmdIns.Parameters.AddWithValue("@IsElevator", listOfParameters[10]);
+                    cmdIns.Parameters.AddWithValue("@IsGarden", listOfParameters[11]);
+                    cmdIns.Parameters.AddWithValue("@IsHeating", listOfParameters[12]);
+                    cmdIns.Parameters.AddWithValue("@IsBasement", listOfParameters[13]);
+                    cmdIns.ExecuteNonQuery();
+                }
+                catch (Exception ex) { throw new Exception("Database connection error", ex); }
+                finally
+                {
+                    con.Close();
+                }
             }
-            catch (Exception ex) { throw new Exception("Database connection error", ex); }
-            finally
-            {
-                con.Close();
-            }
-        }
             else
             {
                 try
@@ -887,13 +927,11 @@ namespace Management_System
             }
         }
 
-
-
-        
+        //Refresh Buildings listView
         public List<string> UpdateBuildingsList()
         {
             items = new List<string>();
-            
+
             if (isOnline)
             {
                 con.Open();
@@ -922,6 +960,7 @@ namespace Management_System
             }
         }
 
+        //Refresh types of Malfunctions list
         public List<string> UpdateMalsTypesList()
         {
             items = new List<string>();
@@ -954,6 +993,8 @@ namespace Management_System
             }
 
         }
+
+        //Refresh list of states appartments
         public List<string> UpdateTypesList()
         {
             items = new List<string>();
@@ -986,6 +1027,7 @@ namespace Management_System
             }
         }
 
+        //Gets all information about a building by address
         public List<string> getAllBuildingInfo(string name)
         {
             items = new List<string>();
@@ -1070,8 +1112,7 @@ namespace Management_System
             }
         }
 
-
-        
+        //Delete building by address
         public void deleteBuilding(string name)
         {
             if (isOnline)
@@ -1089,9 +1130,14 @@ namespace Management_System
                        "DELETE FROM malfunctions WHERE building='" + name + "'",
                          con); //DELETE ALL MALFUNCTIONS FROM THAT BUILDING
 
+                MySqlCommand cmd3 = new MySqlCommand(
+                       "DELETE FROM meetings WHERE building='" + name + "'",
+                         con); //DELETE ALL MEETINGS FROM THAT BUILDING
+
                 cmd.ExecuteNonQuery();
                 cmd1.ExecuteNonQuery();
                 cmd2.ExecuteNonQuery();
+                cmd3.ExecuteNonQuery();
                 con.Close();
             }
             else
@@ -1109,16 +1155,20 @@ namespace Management_System
                        "DELETE FROM malfunctions WHERE building='" + name + "'",
                          conLocal); //DELETE ALL MALFUNCTIONS FROM THAT BUILDING
 
-                //NEEDS TO DELETE ITS EXCEL FORM !!!
+                SqlCommand cmd3 = new SqlCommand(
+                       "DELETE FROM meetings WHERE building='" + name + "'",
+                         conLocal); //DELETE ALL MEETINGS FROM THAT BUILDING
+
+
                 cmd.ExecuteNonQuery();
                 cmd1.ExecuteNonQuery();
                 cmd2.ExecuteNonQuery();
+                cmd3.ExecuteNonQuery();
                 conLocal.Close();
             }
         }
 
-
-
+        //Update building information
         public void updateBuilding(List<string> list, string id)
         {
             if (isOnline)
@@ -1190,17 +1240,18 @@ namespace Management_System
         }
 
 
+        //Refresh listView of Tenants
         public List<Tenants.Tenant> updateTenantsList()
         {
-            List <Tenants.Tenant> list = new List<Tenants.Tenant>();
+            List<Tenants.Tenant> list = new List<Tenants.Tenant>();
             string name, building_name, appartment_number, phone, state;
 
             if (isOnline)
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM tenants ", con); //for reading
-                MySqlDataReader reader = cmd.ExecuteReader(); //for writing
-                while (reader.Read()) //for writing
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM tenants ", con);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
                     name = reader[0].ToString().Trim();
                     building_name = reader[1].ToString().Trim();
@@ -1243,9 +1294,7 @@ namespace Management_System
             }
         }
 
-
-
-
+        //Show Tenants information in report list
         public List<Tenants.Tenant> showTenantsListOnReport(string address)
         {
             List<Tenants.Tenant> list = new List<Tenants.Tenant>();
@@ -1336,7 +1385,7 @@ namespace Management_System
             }
         }
 
-
+        //Delete Tenant functoin
         public void deleteTenant(string name)
         {
             if (isOnline)
@@ -1356,7 +1405,7 @@ namespace Management_System
         }
 
 
-
+        //Show tenant information by name
         public string[] showTenant(string name)
         {
             string[] tempList = new string[8];
@@ -1365,9 +1414,9 @@ namespace Management_System
             if (isOnline)
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM tenants WHERE name='" + name + "'", con); //for reading
-                MySqlDataReader reader = cmd.ExecuteReader(); //for writing
-                while (reader.Read()) //for writing
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM tenants WHERE name='" + name + "'", con);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
                     tempList[0] = reader[0].ToString().Trim();
                     tempList[1] = reader[7].ToString().Trim();
@@ -1384,9 +1433,9 @@ namespace Management_System
             else
             {
                 conLocal.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM tenants WHERE name='" + name + "'", conLocal); //for reading
-                SqlDataReader reader = cmd.ExecuteReader(); //for writing
-                while (reader.Read()) //for writing
+                SqlCommand cmd = new SqlCommand("SELECT * FROM tenants WHERE name='" + name + "'", conLocal);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
                     tempList[0] = reader[0].ToString().Trim();
                     tempList[1] = reader[7].ToString().Trim();
@@ -1402,6 +1451,8 @@ namespace Management_System
             }
         }
 
+
+        //Refresh list of tenants in Building Report
         public void updateTenantOfReports(string[] list, int year)
         {
             string sqlIns = "UPDATE tenants SET january" + year + "=@jan,february" + year + "=@feb,march" + year + "=@mar, april" + year + "=@apr,may" + year + "=@may,june" + year + "=@jun,july" + year + "=@jul,august" + year + "=@aug, september" + year + "=@sep, october" + year + "=@oct, november" + year + "=@nov, december" + year + "=@dec WHERE name=@name";
@@ -1466,16 +1517,10 @@ namespace Management_System
             }
         }
 
-
-
-
-
-
-
-
-        public void updateTenant(string [] list, string address)
+        //Update tenant information
+        public void updateTenant(string[] list, string address)
         {
-            
+
             string sqlIns = "UPDATE tenants SET name=@name,building=@building,floor_number=@floor, phoner_number=@phone,cellphone_number=@cellphone,email_address=@email,appartment_state=@state,appartent_number=@app_number WHERE name=@id";
             if (isOnline)
             {
@@ -1529,7 +1574,8 @@ namespace Management_System
 
         }
 
-        public void saveTenant(string [] list)
+        //Save tenant info
+        public void saveTenant(string[] list)
         {
 
             string sqlIns = "INSERT INTO tenants (name,building, floor_number, phoner_number, cellphone_number, email_address, appartment_state, appartent_number) VALUES (@name, @building, @floor, @phone, @cellphone, @email, @state, @appar_number)";
@@ -1580,7 +1626,5 @@ namespace Management_System
                 }
             }
         }
-
-
     }
 }

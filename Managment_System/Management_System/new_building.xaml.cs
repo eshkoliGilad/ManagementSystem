@@ -22,7 +22,7 @@ namespace Management_System
     public partial class new_building : Window
     {
         string name = "";
-        bool flag = false;
+        bool updateOnly=false;
         SqlDB db;
         string[] list;
         List<string> info, updatedInfo;
@@ -38,11 +38,12 @@ namespace Management_System
         //New building constructor for editing exists buildings
         public new_building(string address)
         {
+
             InitializeComponent();
             db = new SqlDB();
             list = new string[14];
             name = address;
-            flag = true;
+            updateOnly = true;
             info = new List<string>();
             info=db.getAllBuildingInfo(address);
 
@@ -74,47 +75,66 @@ namespace Management_System
                 basement_checkbox.IsChecked= false;
         }
 
-        //Save buildingss information in DB
+        //Save buildings information in DB
         private void new_save_Click(object sender, RoutedEventArgs e)
         {
-            list[0] = address_box.Text.ToString().Trim();
-            list[1] = account_box.Text.ToString().Trim();
-            list[2] = floors_box.Text.ToString().Trim();
-            list[3] = tenants_box.Text.ToString().Trim();
-            list[4] = order_box.Text.ToString().Trim();
-            list[5] = gardner_box.Text.ToString().Trim();
-            list[6] = phone_box.Text.ToString().Trim();
-            list[7] = num_elevator_box.Text.ToString().Trim();
-            list[8] = heating_type_box.Text.ToString().Trim();
-            list[9] = service_type_box.Text.ToString().Trim();
-            if (elevator_checkbox.IsChecked.Value)
-                list[10] = "Yes";
-            else
-                list[10] = "No";
-            if (garden_checkbox.IsChecked.Value)
-                list[11] = "Yes";
-            else
-                list[11] = "No";
-
-            if (heating_checkbox.IsChecked.Value)
-                list[12] = "Yes";
-            else
-                list[12] = "No";
-            if (basement_checkbox.IsChecked.Value)
-                list[13] = "Yes";
-            else
-                list[13] = "No";
-
-            if (flag == false)
-                db.add_new_building(list);
+            bool flag=false;
+            List<string> a = new List<string>();
+            a=db.UpdateBuildingsList();
+            foreach(string s in a)
+                if(s.Equals(address_box.Text.Trim()))
+                    flag=true;
+            if (address_box.Text == "")
+            {
+                MessageBox.Show("בחר שם לבניין");
+                return;
+            }
+            else if (flag && !updateOnly)
+            {
+                MessageBox.Show("שם קיים, בחר שם אחר לבניין");
+                return;
+            }
             else
             {
-                updatedInfo = new List<string>(list);
-                db.updateBuilding(updatedInfo, name);
+                list[0] = address_box.Text.ToString().Trim();
+                list[1] = account_box.Text.ToString().Trim();
+                list[2] = floors_box.Text.ToString().Trim();
+                list[3] = tenants_box.Text.ToString().Trim();
+                list[4] = order_box.Text.ToString().Trim();
+                list[5] = gardner_box.Text.ToString().Trim();
+                list[6] = phone_box.Text.ToString().Trim();
+                list[7] = num_elevator_box.Text.ToString().Trim();
+                list[8] = heating_type_box.Text.ToString().Trim();
+                list[9] = service_type_box.Text.ToString().Trim();
+                if (elevator_checkbox.IsChecked.Value)
+                    list[10] = "Yes";
+                else
+                    list[10] = "No";
+                if (garden_checkbox.IsChecked.Value)
+                    list[11] = "Yes";
+                else
+                    list[11] = "No";
+
+                if (heating_checkbox.IsChecked.Value)
+                    list[12] = "Yes";
+                else
+                    list[12] = "No";
+                if (basement_checkbox.IsChecked.Value)
+                    list[13] = "Yes";
+                else
+                    list[13] = "No";
+
+                if (flag == false)
+                    db.add_new_building(list);
+                else
+                {
+                    updatedInfo = new List<string>(list);
+                    db.updateBuilding(updatedInfo, name);
+                }
+
+                Switcher.Switch(new Buildings());
+                this.Close();
             }
-              
-            Switcher.Switch(new Buildings());
-            this.Close();    
         }
 
         //Close Window

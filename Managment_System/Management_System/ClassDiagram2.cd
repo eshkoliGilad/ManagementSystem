@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Management_System.Buildings">
+    <Position X="13.75" Y="5.25" Width="3" />
+    <NestedTypes>
+      <Class Name="Management_System.Buildings.Building" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Buildings.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <AssociationLine Name="exit" Type="Management_System.exit_query" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="16.75" Y="7.472" />
+        <Point X="17.125" Y="7.472" />
+        <Point X="17.125" Y="18.584" />
+        <Point X="17.855" Y="18.584" Type="JumpStart" />
+        <Point X="18.021" Y="18.584" Type="JumpEnd" />
+        <Point X="32.708" Y="18.584" />
+        <Point X="32.708" Y="16.117" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>MABAAAAQIAAQAAIBCAgAAAAAEAAAEAAAAACQACAAAAA=</HashCode>
+      <FileName>Buildings.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+      <Field Name="exit" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Management_System.Buildings_report">
+    <Position X="9.25" Y="5.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAARABAAAAAAAAAAAACABAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Buildings_report.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Management_System.description">
+    <Position X="20" Y="14.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiAAAAAAAAAA=</HashCode>
+      <FileName>description.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="malfunction" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Management_System.exit_query">
+    <Position X="31.25" Y="14.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>exit_query.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Management_System.loading">
+    <Position X="11.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>loading.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Management_System.Login">
+    <Position X="11.5" Y="5.25" Width="1.5" />
+    <AssociationLine Name="pageswitcher" Type="Management_System.PageSwitcher" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13" Y="6" />
+        <Point X="13.375" Y="6" />
+        <Point X="13.375" Y="2.992" />
+        <Point X="19.75" Y="2.992" />
+        <Point X="19.75" Y="2.617" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIIQAAAAAIAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Login.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+      <Field Name="load" />
+      <Field Name="ticker" />
+      <Field Name="pageswitcher" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Management_System.MainMenu" BaseTypeListCollapsed="true">
+    <Position X="30.5" Y="5.25" Width="2" />
+    <AssociationLine Name="db" Type="Management_System.SqlDB" ManuallyRouted="true">
+      <Path>
+        <Point X="31.5" Y="7.829" />
+        <Point X="31.5" Y="11.627" />
+        <Point X="30.083" Y="11.627" Type="JumpStart" />
+        <Point X="29.917" Y="11.627" Type="JumpEnd" />
+        <Point X="27" Y="11.627" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAEAAAAgAAiEAAAAAAAAACAAGAAAAA=</HashCode>
+      <FileName>MainMenu.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+      <Field Name="exit" />
+    </ShowAsAssociation>
+    <Lollipop Orientation="Right" Position="0.293" />
+  </Class>
+  <Class Name="Management_System.Malfunctions">
+    <Position X="20.5" Y="5.25" Width="3.25" />
+    <NestedTypes>
+      <Class Name="Management_System.Malfunctions.Malfunction_Closed" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Malfunctions.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Management_System.Malfunctions.Malfunction" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Malfunctions.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <AssociationLine Name="exit" Type="Management_System.exit_query" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="23.75" Y="9.047" />
+        <Point X="24.125" Y="9.047" />
+        <Point X="24.125" Y="17.793" />
+        <Point X="32.125" Y="17.793" />
+        <Point X="32.125" Y="16.117" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>gAAAAAAABAAQAQAIAQgEAAAAEgAQAAAAACCAgCAAAAg=</HashCode>
+      <FileName>Malfunctions.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+      <Field Name="exit" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Management_System.meetings">
+    <Position X="11.5" Y="1" Width="2.25" />
+    <NestedTypes>
+      <Class Name="Management_System.meetings.Meeting" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>meetings.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAQABACAAgAAAARAACAAAAAACAAAAQAAAA=</HashCode>
+      <FileName>meetings.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Management_System.new_building">
+    <Position X="26.5" Y="14.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAgACAAAQAAAAAIAAAAAAEAAEAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>new_building.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Management_System.new_malfunction">
+    <Position X="28.75" Y="14.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAQAAACAAAAAAAAAAAAAAAAACEAAAAAAAQ=</HashCode>
+      <FileName>new_malfunction.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Management_System.new_tenant">
+    <Position X="22" Y="14.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAwAAAAAAAAQAAAAAIQAAAAAAAIAAAAAAAAAAQQAAAA=</HashCode>
+      <FileName>new_tenant.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Management_System.PageSwitcher">
+    <Position X="18.75" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>PageSwitcher.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Management_System.Reports">
+    <Position X="27.75" Y="5.25" Width="1.75" />
+    <NestedTypes>
+      <Class Name="Management_System.Reports.Report" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Reports.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <AssociationLine Name="exit" Type="Management_System.exit_query" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="28.625" Y="7.963" />
+        <Point X="28.625" Y="8.338" />
+        <Point X="31.417" Y="8.338" Type="JumpStart" />
+        <Point X="31.583" Y="8.338" Type="JumpEnd" />
+        <Point X="31.979" Y="8.338" Type="JumpStart" />
+        <Point X="32.146" Y="8.338" Type="JumpEnd" />
+        <Point X="32.89" Y="8.338" />
+        <Point X="32.89" Y="14.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAQAAAAAAgAAAAQEAAAAACAAAAAACAAAAA=</HashCode>
+      <FileName>Reports.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+      <Field Name="exit" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Management_System.SqlDB">
+    <Position X="24.75" Y="5.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>JAAAGAACAEAQQAwIABgCAYgAAooAJQAAQgYQARRAAAQ=</HashCode>
+      <FileName>SqlDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Management_System.Switcher">
+    <Position X="15.75" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Switcher.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pageSwitcher" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Management_System.Tenants">
+    <Position X="17.5" Y="5.25" Width="2.25" />
+    <NestedTypes>
+      <Class Name="Management_System.Tenants.Tenant" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Tenants.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <AssociationLine Name="exit" Type="Management_System.exit_query" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="17.938" Y="8.54" />
+        <Point X="17.938" Y="19.176" />
+        <Point X="33.125" Y="19.176" />
+        <Point X="33.125" Y="15.688" />
+        <Point X="33" Y="15.688" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAQAAIAAAgAAAAAAQAAAAACAACAACBAAEA=</HashCode>
+      <FileName>Tenants.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="db" />
+      <Field Name="exit" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Management_System.Ticker" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAQAAAAAAAAAAAAAAAgCAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ticker.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Management_System.ISwitchable">
+    <Position X="33.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ISwitchable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

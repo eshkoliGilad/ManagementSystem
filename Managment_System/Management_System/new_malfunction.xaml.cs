@@ -24,12 +24,13 @@ namespace Management_System
     public partial class new_malfunction : Window
     {
         SqlDB db;
-
+        string dateString; 
         //New malfunction constructor
         public new_malfunction()
         {
             InitializeComponent();
             db = new SqlDB();
+            dateString = DateTime.Today.ToShortDateString().ToString();
         }
 
 
@@ -51,25 +52,44 @@ namespace Management_System
             comboBox.ItemsSource = data;
         }
 
+        private void DatePicker_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            var picker = sender as DatePicker;
+            DateTime? date = picker.SelectedDate;
+            if (date == null)
+                dateString = DateTime.Today.ToString();
+            else
+                dateString = date.Value.ToShortDateString();
+        }
+
         //Save button logic
         private void save_malfunctions_button_Click(object sender, RoutedEventArgs e)
         {
-            string[] list = new string[4];
-            var comboBox = sender as ComboBox;
-            list[0] = DateTime.Now.ToString("dd-MM-yyyy");
-            list[2] = combobox_type_mal.SelectedValue.ToString();
-            list[1] = combobox_building_mal.SelectedValue.ToString();
-            list[3] = description_mal_box.Text.ToString();
-            try
+            if (combobox_type_mal.SelectedValue == null && combobox_building_mal.SelectedValue!=null)
+                MessageBox.Show("לא נבחרה תקלה");
+            else if(combobox_type_mal.SelectedValue != null && combobox_building_mal.SelectedValue==null)
+                MessageBox.Show("לא נבחר בניין");
+            else if (combobox_type_mal.SelectedValue == null && combobox_building_mal.SelectedValue == null)
+                MessageBox.Show("לא נבחרה תקלה ולא נבחר בניין");
+            else
             {
-                db.save_Malfunction(list);
-            }
-            catch (Exception ex) { throw new Exception("Error saving Malfunction", ex); }
-            finally
-            {
-                MessageBox.Show(".תקלה חדשה נשמרה בהצלחה"); //Save stats in DB and refresh list !!!!
-                Switcher.Switch(new Malfunctions());
-                this.Close();
+                string[] list = new string[4];
+                var comboBox = sender as ComboBox;
+                list[0] = dateString;
+                list[2] = combobox_type_mal.SelectedValue.ToString();
+                list[1] = combobox_building_mal.SelectedValue.ToString();
+                list[3] = description_mal_box.Text.ToString();
+                try
+                {
+                    db.save_Malfunction(list);
+                }
+                catch (Exception ex) { throw new Exception("Error saving Malfunction", ex); }
+                finally
+                {
+                    MessageBox.Show(".תקלה חדשה נשמרה בהצלחה"); //Save stats in DB and refresh list !!!!
+                    Switcher.Switch(new Malfunctions());
+                    this.Close();
+                }
             }
         }
     }

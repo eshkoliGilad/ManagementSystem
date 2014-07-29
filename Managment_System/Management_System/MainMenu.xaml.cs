@@ -22,6 +22,8 @@ namespace Management_System
     //This class represent the Main Menu of the app
     public partial class MainMenu : UserControl, ISwitchable
     {
+        
+        exit_query exit;
         public MainMenu()
         {
             InitializeComponent();
@@ -50,7 +52,7 @@ namespace Management_System
         //Exit button logic
         private void exit_button_Click(object sender, RoutedEventArgs e)
         {
-            Window exit = new exit_query();
+            exit = new exit_query();
             exit.Show();
         }
 
